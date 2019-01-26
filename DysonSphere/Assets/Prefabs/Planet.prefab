@@ -44,6 +44,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc06c28dc6b1e3941a47e1b845e076bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetResources:
+  - key: Everything-ium
+    max: 1000
+    current: 100
+    replenPeriod: 1
 --- !u!212 &571039869393829219
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -82,7 +87,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 4b9b41221109efb4f976789a4751442f, type: 3}
-  m_Color: {r: 1, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.6981132, g: 0.2776678, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
