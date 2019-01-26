@@ -25,8 +25,5 @@ public class RotateMe : MonoBehaviour
         Vector2 direction = transform.localPosition.normalized;
         var prb = transform.parent.GetComponent<Rigidbody2D>();
         prb.AddForce(direction * -10f * ThrustVel);
-
-
-        Debug.Log("Position is -> " + transform.rotation);
     }
 }
