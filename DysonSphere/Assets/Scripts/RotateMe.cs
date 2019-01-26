@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class RotateMe : MonoBehaviour
 {
+    public float ThrustPos = 0f;
+    public float ThrustVel = 0f;
+
     private float _maxRotSpeed = 200f;
 
     // Update is called once per frame
     void Update()
     {
-        float translation = Input.GetAxis("Horizontal") * _maxRotSpeed;
+        float translation = ThrustPos * _maxRotSpeed;
         
         Vector3 axis;
         if(translation > 0)
@@ -19,9 +22,11 @@ public class RotateMe : MonoBehaviour
 
         transform.RotateAround(transform.parent.position, axis, Time.deltaTime * Mathf.Abs(translation));
 
-        float thrust = Input.GetAxis("Vertical");
         Vector2 direction = transform.localPosition.normalized;
         var prb = transform.parent.GetComponent<Rigidbody2D>();
-        prb.AddForce(direction * -10f * thrust);
+        prb.AddForce(direction * -10f * ThrustVel);
+
+
+        Debug.Log("Position is -> " + transform.rotation);
     }
 }
