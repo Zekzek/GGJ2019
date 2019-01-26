@@ -14,11 +14,7 @@ public class KeyboardCommand : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        var f = Input.GetAxis("Horizontal");
-
-        ship.ThrustPos = f;
-
-        float thrust = Input.GetAxis("Vertical");
-        ship.ThrustVel = thrust;
+        ship.ThrustPos = Input.GetAxis("Horizontal");
+        ship.ThrustVel = Input.GetAxis("Vertical");
     }
 }
