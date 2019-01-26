@@ -16,10 +16,12 @@ public class RotateMe : MonoBehaviour
     public Vector2 ShipVel { get { return _parentRB.velocity; } private set { } }
 
     private Rigidbody2D _parentRB;
+    private float _dragForce = 5;
 
     private void Start()
     {
         _parentRB = transform.parent.GetComponent<Rigidbody2D>();
+        _parentRB.drag = _dragForce;
     }
 
     // Update is called once per frame
@@ -48,6 +50,15 @@ public class RotateMe : MonoBehaviour
         }
 
         Vector2 direction = transform.localPosition.normalized;
-        _parentRB.AddForce(direction * -10f * ThrustVel);
+
+        if(ThrustVel != 0)
+        {
+            _parentRB.AddForce(direction * -10f * ThrustVel);
+            _parentRB.drag = 0;
+        }
+        else
+        {
+            _parentRB.drag = _dragForce;
+        }
     }
 }
