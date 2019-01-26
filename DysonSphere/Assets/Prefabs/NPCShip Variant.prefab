@@ -22,7 +22,7 @@ PrefabInstance:
     - target: {fileID: 7262982851045048345, guid: 3abc32633ba650c41847b704706f1d0e,
         type: 3}
       propertyPath: m_Name
-      value: NPCShip
+      value: NPCShip Variant
       objectReference: {fileID: 0}
     - target: {fileID: 7262982851045048351, guid: 3abc32633ba650c41847b704706f1d0e,
         type: 3}
@@ -77,6 +77,21 @@ PrefabInstance:
     - target: {fileID: 7262982851045048351, guid: 3abc32633ba650c41847b704706f1d0e,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262982851045048350, guid: 3abc32633ba650c41847b704706f1d0e,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262982851045048350, guid: 3abc32633ba650c41847b704706f1d0e,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 0.3959781
+      objectReference: {fileID: 0}
+    - target: {fileID: 7262982851045048350, guid: 3abc32633ba650c41847b704706f1d0e,
+        type: 3}
+      propertyPath: m_Color.b
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2005854007, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
