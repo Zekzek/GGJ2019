@@ -5,7 +5,7 @@ using UnityEngine;
 public class MultiTool : MonoBehaviour
 {
     private float _rotSpeed = 2000f;
-
+    public float lookSpeed;
     // Update is called once per frame
     void Update()
     {
@@ -13,6 +13,6 @@ public class MultiTool : MonoBehaviour
         diff.Normalize();
 
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.Euler(0f, 0f, rot_z - 90);
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * lookSpeed);
     }
 }
