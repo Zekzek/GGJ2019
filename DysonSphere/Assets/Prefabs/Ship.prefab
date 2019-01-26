@@ -113,6 +113,7 @@ GameObject:
   - component: {fileID: 7262982851986007807}
   - component: {fileID: 7262982851986007805}
   - component: {fileID: 598786257}
+  - component: {fileID: 965011680}
   m_Layer: 0
   m_Name: Rotator
   m_TagString: Untagged
@@ -127,8 +128,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7262982851986007806}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 0.2, y: 0.2, z: 1}
   m_Children: []
   m_Father: {fileID: 7262982851045048351}
@@ -171,7 +172,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4b9b41221109efb4f976789a4751442f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: bdb8b0db6e996f343af5c9822394f37a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -192,5 +193,21 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 51204bce9809732459bde255346fb58c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Target: {fileID: 0}
+  RotSpeed: 200
+  ThrustPos: 0
+  ThrustVel: 0
+--- !u!114 &965011680
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262982851986007806}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1621982892125e448928776198069492, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
