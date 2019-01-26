@@ -18,8 +18,11 @@ public class RotateMe : MonoBehaviour
     private Rigidbody2D _parentRB;
     private float _dragForce = 5;
 
+    private float _maxVel = 7f;
+    private float _sqrMaxVel;
     private void Start()
     {
+        _sqrMaxVel = _maxVel * _maxVel;
         _parentRB = transform.parent.GetComponent<Rigidbody2D>();
         _parentRB.drag = _dragForce;
     }
@@ -59,6 +62,11 @@ public class RotateMe : MonoBehaviour
         else
         {
             _parentRB.drag = _dragForce;
+        }
+
+        if(_parentRB.velocity.sqrMagnitude >= _sqrMaxVel)
+        {
+            _parentRB.velocity = _parentRB.velocity.normalized * _maxVel;
         }
     }
 }
