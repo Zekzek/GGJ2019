@@ -30,7 +30,7 @@ public class RotateMe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LockOn)
+        if (LockOn && Target != null)
         {
             var targetRotationLookAt = (transform.parent.position - Target).normalized;
             DeltaAngle = Mathf.Acos(Vector3.Dot(transform.up, targetRotationLookAt));
@@ -54,7 +54,7 @@ public class RotateMe : MonoBehaviour
 
         Vector2 direction = transform.localPosition.normalized;
 
-        if(ThrustVel != 0)
+        if (ThrustVel != 0)
         {
             _parentRB.AddForce(direction * -10f * ThrustVel);
             _parentRB.drag = 0;
@@ -64,7 +64,7 @@ public class RotateMe : MonoBehaviour
             _parentRB.drag = _dragForce;
         }
 
-        if(_parentRB.velocity.sqrMagnitude >= _sqrMaxVel)
+        if (_parentRB.velocity.sqrMagnitude >= _sqrMaxVel)
         {
             _parentRB.velocity = _parentRB.velocity.normalized * _maxVel;
         }

@@ -22,17 +22,21 @@ public class AIController : MonoBehaviour
 
     private void Update()
     {
-        Go(GetBestResourceSource(transform.position));
+        Vector3 target = GetBestResourceSource(transform.position);
+        if (target != null && !float.IsNaN(target.x) && !float.IsNaN(target.y) && !float.IsNaN(target.z))
+            Go(target);
+        else
+            ClearTarget();
     }
 
     private void Go(Vector3 target)
     {
         float targetThrustVelocity = 0;
 
+        float sqrDistance = (target - transform.position).sqrMagnitude;
         if (rotateMe.DeltaAngle < CLOSE_ANGLE && rotateMe.DeltaAngle > -CLOSE_ANGLE)
         {
             float offCourseDamper = Mathf.Abs(rotateMe.DeltaAngle) / CLOSE_ANGLE;
-            float sqrDistance = (target - transform.position).sqrMagnitude;
 
             if (sqrDistance > SQR_CLOSE_DISTANCE)
                 targetThrustVelocity = offCourseDamper;
@@ -40,10 +44,15 @@ public class AIController : MonoBehaviour
                 targetThrustVelocity = (sqrDistance - SQR_TARGET_DISTANCE) / (SQR_CLOSE_DISTANCE - SQR_TARGET_DISTANCE) * offCourseDamper;
         }
 
+        rotateMe.LockOn = true;
         rotateMe.ThrustVel = targetThrustVelocity;
         rotateMe.RotSpeed = 500f;
         rotateMe.Target = target;
-        rotateMe.LockOn = true;
+    }
+
+    private void ClearTarget()
+    {
+        rotateMe.LockOn = false;
     }
 
     private static Vector3 GetBestResourceSource(Vector3 source)
