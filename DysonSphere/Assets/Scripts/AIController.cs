@@ -5,9 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(RotateMe))]
 public class AIController : MonoBehaviour
 {
-    private const float CLOSE_DISTANCE = 10;
-    private const float TARGET_DISTANCE = 2;
-    private const float CLOSE_ANGLE = 0.2f;
+    private const float CLOSE_DISTANCE = 20;
+    private const float TARGET_DISTANCE = 4;
+    private const float CLOSE_ANGLE = 0.35f;
     private const float SQR_CLOSE_DISTANCE = CLOSE_DISTANCE * CLOSE_DISTANCE;
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
 
@@ -27,19 +27,20 @@ public class AIController : MonoBehaviour
 
     private void Go(Vector3 target)
     {
+        float targetThrustVelocity = 0;
+
         if (rotateMe.DeltaAngle < CLOSE_ANGLE && rotateMe.DeltaAngle > -CLOSE_ANGLE)
         {
             float offCourseDamper = Mathf.Abs(rotateMe.DeltaAngle) / CLOSE_ANGLE;
             float sqrDistance = (target - transform.position).sqrMagnitude;
 
             if (sqrDistance > SQR_CLOSE_DISTANCE)
-                rotateMe.ThrustVel = offCourseDamper;
+                targetThrustVelocity = offCourseDamper;
             else if (sqrDistance > SQR_TARGET_DISTANCE)
-                rotateMe.ThrustVel = (sqrDistance - SQR_TARGET_DISTANCE) / (SQR_CLOSE_DISTANCE - SQR_TARGET_DISTANCE) * offCourseDamper;
-            //else
-            //    rotateMe.ThrustVel = rotateMe.ShipVel.sqrMagnitude * (sqrDistance - SQR_TARGET_DISTANCE) / (SQR_CLOSE_DISTANCE - SQR_TARGET_DISTANCE);
+                targetThrustVelocity = (sqrDistance - SQR_TARGET_DISTANCE) / (SQR_CLOSE_DISTANCE - SQR_TARGET_DISTANCE) * offCourseDamper;
         }
 
+        rotateMe.ThrustVel = targetThrustVelocity;
         rotateMe.RotSpeed = 500f;
         rotateMe.Target = target;
         rotateMe.LockOn = true;
