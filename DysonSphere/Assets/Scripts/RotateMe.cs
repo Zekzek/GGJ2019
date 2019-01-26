@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class RotateMe : MonoBehaviour
 {
+    public bool LockOn;
     public Vector3 Target;
     public float RotSpeed = 200f;
 
@@ -24,7 +25,7 @@ public class RotateMe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Target != null)
+        if (LockOn)
         {
             var targetRotationLookAt = (transform.parent.position - Target).normalized;
             DeltaAngle = Mathf.Acos(Vector3.Dot(transform.up, targetRotationLookAt));
