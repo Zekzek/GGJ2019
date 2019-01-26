@@ -23,7 +23,7 @@ public class PlanetResource
 
     private float secondsToNextReplen;
 
-    private float Harvestable { get { return current - MIN; } }
+    public float Harvestable { get { return current - MIN; } }
 
     public PlanetResource(float max, float current, float replenPeriod)
     {
