@@ -51,4 +51,39 @@ public class GameState : MonoBehaviour
     }
 
     public PlayerState player = new PlayerState();
+
+    public bool CheckWin()
+    {
+        bool win = false;
+        bool over = false;
+
+        if (player.Ship == null || player.Ship.Health <= 0)
+        {
+            win = false;
+            over = true;
+        }
+        else if (ships.Count == 0)
+        {
+            win = true;
+            over = true;
+        }
+        else
+        {
+            foreach (Ship ship in ships)
+            {
+                //if (!ship.Allied)
+                {
+                    break;
+                }
+            }
+        }
+
+        if (over)
+        {
+            Time.timeScale = 0;
+            Debug.Log("Game over!!!");
+        }
+
+        return over;
+    }
 }
