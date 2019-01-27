@@ -44,5 +44,10 @@ public class KeyboardCommand : MonoBehaviour
         {
             _tool.ActivateMultiTool();
         }
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            _tool.StopMultiTool();
+        }
     }
 }

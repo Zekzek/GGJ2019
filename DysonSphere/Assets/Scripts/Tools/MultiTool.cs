@@ -69,6 +69,11 @@ public class MultiTool : MonoBehaviour
         }
     }
 
+    public void StopMultiTool()
+    {
+        Tools[_selectedTool].GetComponent<ToolControl>().StopActivate();
+    }
+
     void Update()
     {
         Vector3 diff = Target - transform.position;

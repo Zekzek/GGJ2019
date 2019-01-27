@@ -63,4 +63,6 @@ public abstract class ToolControl : MonoBehaviour
     }
 
     public abstract void DoActivate();
+
+    public virtual void StopActivate() { }
 }

@@ -9,10 +9,15 @@ public class GatherControl : ToolControl
     public LineRenderer line;
     public LineRenderer laserline;
 
+    private LineRenderer _curLine;
+
     public GameObject GatherTxt;
 
     public override void DoActivate()
     {
+        _curLine = laserline;
+        laserline.gameObject.SetActive(true);
+        line.gameObject.SetActive(false);
         if (parentShip != null)
         {
             Ship ship;
@@ -21,7 +26,7 @@ public class GatherControl : ToolControl
             if (ship != null)
             {
                 var newTxt = Instantiate(GatherTxt, transform.parent.position, Quaternion.identity);
-                laserline.gameObject.SetActive(true);
+                
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
@@ -35,7 +40,7 @@ public class GatherControl : ToolControl
             else if (planet != null)
             {
                 var newTxt = Instantiate(GatherTxt, transform.parent.position, Quaternion.identity);
-                laserline.gameObject.SetActive(true);
+                //laserline.gameObject.SetActive(true);
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
@@ -49,10 +54,26 @@ public class GatherControl : ToolControl
             else
             {
                 i = (null);
-                laserline.gameObject.SetActive(false);
-
             }
         }
+    }
+
+    public void StopGather()
+    {
+        _curLine = line;
+        line.gameObject.SetActive(true);
+        laserline.gameObject.SetActive(false);
+    }
+
+    public override void StopActivate()
+    {
+        StopGather();
+    }
+
+
+    private void Start()
+    {
+        _curLine = line;
     }
 
     void Update()
@@ -63,28 +84,28 @@ public class GatherControl : ToolControl
         if (ship != null)
         {
             i = ship.gameObject;
-            line.gameObject.SetActive(true);
+            _curLine.gameObject.SetActive(true);
         }
         else if (planet != null)
         {
             i = planet.gameObject;
-            line.gameObject.SetActive(true);
+            _curLine.gameObject.SetActive(true);
         }
         else
         {
             i = null;
-            line.gameObject.SetActive(false);
+            _curLine.gameObject.SetActive(false);
         }
         if (i != null)
         {
-            line.gameObject.SetActive(true);
+            _curLine.gameObject.SetActive(true);
             var dist = line.GetPosition(0) - i.transform.position;
             //var curPos = line.GetPosition(1);
-            line.SetPosition(1, Vector3.up * Vector3.Distance(transform.position, i.transform.position));
+            _curLine.SetPosition(1, Vector3.up * Vector3.Distance(transform.position, i.transform.position));
         }
         else
         {
-            line.SetPosition(1, line.GetPosition(0));
+            _curLine.SetPosition(1, line.GetPosition(0));
         }
     }
 
