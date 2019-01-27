@@ -26,7 +26,7 @@ public class Bullet : MonoBehaviour
         {
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
 
-            rb.velocity = (rb2d.velocity * hitForce *100);
+            rb.velocity = (rb2d.velocity * hitForce);
             Destroy(gameObject);
         }
     }
