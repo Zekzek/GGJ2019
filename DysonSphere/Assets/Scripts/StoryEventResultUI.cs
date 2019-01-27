@@ -3,7 +3,7 @@ using System.Collections;
 using TMPro;
 using UnityEngine.UI;
 
-public class StoryEventResultUI : MonoBehaviour
+public class StoryEventResultUI : Popup
 {
 	[SerializeField]
 	private TextMeshProUGUI resultText;

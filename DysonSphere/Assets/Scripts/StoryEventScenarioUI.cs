@@ -2,7 +2,7 @@
 using System.Collections;
 using TMPro;
 
-public class StoryEventScenarioUI : MonoBehaviour
+public class StoryEventScenarioUI : Popup
 {
 	[SerializeField]
 	private StoryEventOptionUI optionPrefab;

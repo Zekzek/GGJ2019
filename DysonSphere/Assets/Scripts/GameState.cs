@@ -87,8 +87,16 @@ public class GameState : MonoBehaviour
 
         if (over)
         {
-            Time.timeScale = 0;
-            Debug.Log("Game over!!!");
+			if (win)
+			{
+				PopupManager.Show(Resources.Load<VictoryPopup>("UI/Victory Popup"));
+			}
+			else
+			{
+				PopupManager.Show(Resources.Load<DefeatPopup>("UI/Defeat Popup"));
+			}
+
+			Debug.Log("Game over!!!");
         }
 
         return over;
