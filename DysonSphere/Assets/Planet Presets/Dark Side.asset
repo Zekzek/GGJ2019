@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67c5d11f5426d4c8f50588617a52fe, type: 3}
+  m_Name: Dark Side
+  m_EditorClassIdentifier: 
+  windspeed: 3
+  spinspeed: 2
+  landDetailColor: {r: 0.049127813, g: 0.30735177, b: 0.4528302, a: 1}
+  landColor: {r: 0, g: 0.17071457, b: 0.254717, a: 1}
+  waterColor: {r: 0.6767557, g: 0.1477839, b: 0.764151, a: 0.6862745}
+  cloudColor: {r: 0.4253738, g: 0.745283, b: 0.6222411, a: 0.39215687}
