@@ -40,15 +40,18 @@ public class GatherControl : ToolControl
         GetInFront(new Vector2(2, 5), out ship, out planet);
         if (ship != null)
         {
-            i = (ship.gameObject);
+            i = ship.gameObject;
+            line.gameObject.SetActive(true);
         }
         else if (planet != null)
         {
-            i = (planet.gameObject);
+            i = planet.gameObject;
+            line.gameObject.SetActive(true);
         }
         else
         {
-            i = (null);
+            i = null;
+            line.gameObject.SetActive(false);
         }
         if (i != null)
         {
