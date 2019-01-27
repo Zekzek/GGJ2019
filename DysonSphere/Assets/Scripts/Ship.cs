@@ -13,6 +13,8 @@ public class Ship : MonoBehaviour, IScannable
     public int Health { get; set; }
     private AIController ai;
 
+    public AIController.RelationshipStatus PlayerRelationShip { get { return ai == null ? AIController.RelationshipStatus.Neutral : ai.PlayerRelationship; } }
+
     public float TotalResources
     {
         get
@@ -35,7 +37,7 @@ public class Ship : MonoBehaviour, IScannable
         resources.Add(new Resource(Resource.Type.Stuffium, 100));
         ai = GetComponent<AIController>();
 
-        if(PlayerShip())
+        if (PlayerShip())
         {
             GameState.Instance.player.Ship = GetComponent<Ship>();
         }

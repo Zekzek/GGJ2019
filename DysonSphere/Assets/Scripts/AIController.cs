@@ -12,7 +12,7 @@ public class AIController : MonoBehaviour
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
     private const float SQR_SHOOT_DISTANCE = SHOOT_DISTANCE * SHOOT_DISTANCE;
     private const int ENEMY_RELATIONSHIP_LEVEL = -50;
-    private const int FRIEND_RELATIONSHIP_LEVEL = 20;
+    private const int ALLY_RELATIONSHIP_LEVEL = 20;
 
     private const int MULTITOOL_GUN = 0;
     private const int MULTITOOL_GATHER = 1;
@@ -21,6 +21,25 @@ public class AIController : MonoBehaviour
     public enum Personality { Gatherer, Social, Hostile, Pest }
     private enum Task { HarvestFromPlanet, StealFromShip, TalkToShip, DestroyShip }
     private Task currentTask;
+
+    public enum RelationshipStatus { Ally, Neutral, Enemy }
+    public RelationshipStatus PlayerRelationship
+    {
+        get
+        {
+            Ship playerShip = GameState.Instance.player.Ship;
+            if (!relationships.ContainsKey(playerShip))
+                relationships.Add(playerShip, 0);
+
+            int relationship = relationships[playerShip];
+            if (relationship <= ENEMY_RELATIONSHIP_LEVEL)
+                return RelationshipStatus.Enemy;
+            else if (relationship >= ALLY_RELATIONSHIP_LEVEL)
+                return RelationshipStatus.Ally;
+            else
+                return RelationshipStatus.Neutral;
+        }
+    }
 
     private float speed = 0.7f;
 
