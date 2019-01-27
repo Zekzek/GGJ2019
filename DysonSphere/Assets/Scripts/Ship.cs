@@ -9,6 +9,8 @@ public class Ship : MonoBehaviour
     public SpriteRenderer[] waterSpr;
     public SpriteRenderer[] windSpr;
     private List<Resource> resources = new List<Resource>();
+    public int Health { get; set; }
+    private AIController ai;
 
     public float TotalResources
     {
@@ -26,9 +28,11 @@ public class Ship : MonoBehaviour
     private void Start()
     {
         setPreset();
+        Health = 100;
 
         GameState.Instance.AddShip(this);
         resources.Add(new Resource(Resource.Type.Stuffium, 100));
+        ai = GetComponent<AIController>();
     }
 
     public void AddRandomResource(float amount)
@@ -48,6 +52,21 @@ public class Ship : MonoBehaviour
         resources[resourceIndex].amount -= amount;
 
         return new Resource(resources[resourceIndex].type, amount);
+    }
+
+    public void TakeDamage(int damage, Ship damageSource)
+    {
+        if (ai != null)
+            ai.TookDamageFrom(damageSource);
+        Health -= damage;
+        if (Health <= 0)
+            Die();
+    }
+
+    private void Die()
+    {
+        GameState.Instance.RemoveShip(this);
+        Destroy(gameObject);
     }
 
     private void setPreset()

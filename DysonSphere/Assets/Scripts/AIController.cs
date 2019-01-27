@@ -154,4 +154,9 @@ public class AIController : MonoBehaviour
         }
         return closest;
     }
+
+    public void TookDamageFrom(Ship ship)
+    {
+        //TODO: hate them
+    }
 }

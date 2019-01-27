@@ -6,6 +6,8 @@ public class Bullet : MonoBehaviour
 {
     private Rigidbody2D rb2d;
     public int speed;
+    public int damage = 25;
+    public Ship parentShip;
 
     public float hitForce;
 
@@ -26,8 +28,17 @@ public class Bullet : MonoBehaviour
         {
             var rb = collision.gameObject.GetComponent<Rigidbody2D>();
 
-            rb.velocity = (rb2d.velocity * hitForce);
-            Destroy(gameObject);
+            if (rb)
+            {
+                rb.velocity = (rb2d.velocity * hitForce);
+                Destroy(gameObject);
+            }
+
+            Ship ship = collision.gameObject.GetComponent<Ship>();
+            if (ship)
+            {
+                ship.TakeDamage(damage, parentShip);
+            }
         }
     }
 }

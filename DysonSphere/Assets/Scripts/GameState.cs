@@ -41,5 +41,14 @@ public class GameState : MonoBehaviour
         ships.Add(ship);
     }
 
+    public void RemovePlanet(Planet planet)
+    {
+        planets.Remove(planet);
+    }
+    public void RemoveShip(Ship ship)
+    {
+        ships.Remove(ship);
+    }
+
     public PlayerState player = new PlayerState();
 }
