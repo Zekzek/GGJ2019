@@ -81,6 +81,7 @@ public class GameState : MonoBehaviour
         if (over)
         {
             Time.timeScale = 0;
+            Debug.Log("Game over!!!");
         }
 
         return over;
