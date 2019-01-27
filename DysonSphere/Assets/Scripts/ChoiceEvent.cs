@@ -41,6 +41,10 @@ public abstract class ChoiceEvent
 				1,
 				new NewIdeaEvent()
 			},
+            {
+                (float) Math.Pow(GameState.Instance.player.Unrest / 10, 2),
+                new UnrestEvent()
+            }
 		}.PickOne();
 	}
 
