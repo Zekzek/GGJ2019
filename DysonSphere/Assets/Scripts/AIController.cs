@@ -223,7 +223,7 @@ public class AIController : MonoBehaviour
         }
         else if (randomValue < chanceToAttack && CanShoot())
         {
-            currentTask = Task.StealFromShip;
+            currentTask = Task.DestroyShip;
             if (multiTool.SelectedTool != MULTITOOL_GUN)
                 multiTool.UpdateSelectedTool(MULTITOOL_GUN);
             targetShip = GetBestResourceShip(transform.position);
@@ -290,7 +290,7 @@ public class AIController : MonoBehaviour
         return bestPlanet;
     }
 
-    private static Ship GetBestResourceShip(Vector3 source)
+    private Ship GetBestResourceShip(Vector3 source)
     {
         Ship[] ships = GameState.Instance.Ships;
 
@@ -298,6 +298,9 @@ public class AIController : MonoBehaviour
         float bestScore = 0;
         foreach (Ship ship in ships)
         {
+            if (relationships[ship] >= ALLY_RELATIONSHIP_LEVEL)
+                continue;
+
             Vector3 toTarget = ship.transform.position - source;
             float sqrToTargetDistance = toTarget.sqrMagnitude;
             float score = ship.TotalResources / sqrToTargetDistance;
