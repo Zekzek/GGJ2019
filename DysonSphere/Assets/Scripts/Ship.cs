@@ -6,8 +6,22 @@ public class Ship : MonoBehaviour
 {
     private List<Resource> resources = new List<Resource>();
 
+    public float TotalResources
+    {
+        get
+        {
+            float total = 0;
+            foreach (Resource resource in resources)
+            {
+                total += resource.amount;
+            }
+            return total;
+        }
+    }
+
     private void Start()
     {
+        GameState.Instance.AddShip(this);
         resources.Add(new Resource(Resource.Type.Stuffium, 100));
     }
 

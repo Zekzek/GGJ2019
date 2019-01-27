@@ -5,10 +5,6 @@ using UnityEngine;
 
 public class Planet : MonoBehaviour
 {
-    private static List<Planet> planets = new List<Planet>();
-    public static Vector3[] PlanetPositions { get { return planets.Select(x => x.transform.position).ToArray(); } }
-    public static Planet[] Planets { get { return planets.ToArray(); } }
-
     public float TotalResources
     {
         get
@@ -27,7 +23,7 @@ public class Planet : MonoBehaviour
 
     void Start()
     {
-        planets.Add(this);
+        GameState.Instance.AddPlanet(this);
     }
 
     void Update()

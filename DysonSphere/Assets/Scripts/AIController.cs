@@ -1,8 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-[RequireComponent(typeof(RotateMe))]
 public class AIController : MonoBehaviour
 {
     private const float CLOSE_DISTANCE = 20;
@@ -12,6 +10,8 @@ public class AIController : MonoBehaviour
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
 
     public enum Personality { Gatherer, Social, Hostile, Pest }
+    private enum Task { HarvestFromPlanet, StealFromShip, TalkToShip }
+    private Task currentTask;
 
     private float speed = 0.7f;
 
@@ -20,9 +20,15 @@ public class AIController : MonoBehaviour
     private float aiDecisionPeriod = 5f;
     private float remainingTimeToAiDecision;
 
+    private Planet targetPlanet;
+    private Ship targetShip;
+
     private void Start()
     {
-        rotateMe = GetComponent<RotateMe>();
+        rotateMe = GetComponentInChildren<RotateMe>();
+        var keyboardCommand = GetComponent<KeyboardCommand>();
+        if (keyboardCommand != null)
+            keyboardCommand.enabled = false;
     }
 
     private void Update()
@@ -31,21 +37,40 @@ public class AIController : MonoBehaviour
         if (remainingTimeToAiDecision <= 0)
         {
             remainingTimeToAiDecision = aiDecisionPeriod * Random.Range(0.5f, 1.5f);
-            AIGetResource();
+            DoAI();
+        }
+
+        if (currentTask == Task.HarvestFromPlanet)
+        {
+            if (targetPlanet != null)
+                Go(targetPlanet.transform.position);
+        }
+        else if (currentTask == Task.StealFromShip)
+        {
+            if (targetShip != null)
+                Go(targetShip.transform.position);
         }
     }
 
-    public void AIGetResource()
+    private void DoAI()
     {
-        Vector3 target = GetBestResourceSource(transform.position);
-        if (target != null && !float.IsNaN(target.x) && !float.IsNaN(target.y) && !float.IsNaN(target.z))
-            Go(target);
+        if (Random.value < 0.1f)
+        {
+            currentTask = Task.HarvestFromPlanet;
+            targetPlanet = GetBestResourcePlanet(transform.position);
+        }
         else
-            ClearTarget();
+        {
+            currentTask = Task.StealFromShip;
+            targetShip = GetBestResourceShip(transform.position);
+        }
     }
 
     private void Go(Vector3 target)
     {
+        if (target == null)
+            return;
+
         float targetThrustVelocity = 0;
 
         float sqrDistance = (target - transform.position).sqrMagnitude;
@@ -65,16 +90,11 @@ public class AIController : MonoBehaviour
         rotateMe.Target = target;
     }
 
-    private void ClearTarget()
+    private static Planet GetBestResourcePlanet(Vector3 source)
     {
-        rotateMe.LockOn = false;
-    }
+        Planet[] planets = GameState.Instance.Planets;
 
-    private static Vector3 GetBestResourceSource(Vector3 source)
-    {
-        Planet[] planets = Planet.Planets;
-
-        Vector3 bestPosition = Vector3.zero;
+        Planet bestPlanet = null;
         float bestScore = 0;
         foreach (Planet planet in planets)
         {
@@ -84,16 +104,37 @@ public class AIController : MonoBehaviour
 
             if (score > bestScore)
             {
-                bestPosition = planet.transform.position;
+                bestPlanet = planet;
                 bestScore = score;
             }
         }
-        return bestPosition;
+        return bestPlanet;
+    }
+
+    private static Ship GetBestResourceShip(Vector3 source)
+    {
+        Ship[] ships = GameState.Instance.Ships;
+
+        Ship bestShip = null;
+        float bestScore = 0;
+        foreach (Ship ship in ships)
+        {
+            Vector3 toTarget = ship.transform.position - source;
+            float sqrToTargetDistance = toTarget.sqrMagnitude;
+            float score = ship.TotalResources / sqrToTargetDistance;
+
+            if (score > bestScore)
+            {
+                bestShip = ship;
+                bestScore = score;
+            }
+        }
+        return bestShip;
     }
 
     private static Vector3 GetDirectionToClosestPlanet(Vector3 source)
     {
-        return GetClosest(source, Planet.PlanetPositions) - source;
+        return GetClosest(source, GameState.Instance.PlanetPositions) - source;
     }
 
     private static Vector3 GetClosest(Vector3 source, Vector3[] targets)
