@@ -65,6 +65,11 @@ public class Ship : MonoBehaviour, IScannable
         }
         resources[resourceIndex].amount -= amount;
 
+        if (PlayerShip())
+        {
+            GameState.Instance.player.OnResourceChange?.Invoke();
+        }
+
         return new Resource(resources[resourceIndex].type, amount);
     }
 
