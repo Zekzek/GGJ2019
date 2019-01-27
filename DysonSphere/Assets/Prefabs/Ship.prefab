@@ -168,7 +168,7 @@ GameObject:
   m_Component:
   - component: {fileID: 55348671}
   - component: {fileID: 55348672}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3669,6 +3669,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   line: {fileID: 1029797427715830243}
+  GatherTxt: {fileID: 3639100887414448080, guid: e0ce33225a381bb499c4db018f5a0bf9,
+    type: 3}
 --- !u!1 &1991302260
 GameObject:
   m_ObjectHideFlags: 0

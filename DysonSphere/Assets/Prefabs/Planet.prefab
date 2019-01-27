@@ -100,6 +100,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Resource Planet
       objectReference: {fileID: 0}
+    - target: {fileID: 384127115727635765, guid: a43f04272ed92e64bbbe90496750322d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 8105338771343512475, guid: a43f04272ed92e64bbbe90496750322d,
         type: 3}
       propertyPath: m_LocalPosition.x
