@@ -22,7 +22,6 @@ public class Planet : MonoBehaviour
         }
     }
 
-
     [SerializeField]
     private PlanetResource[] planetResources;
 
@@ -35,5 +34,12 @@ public class Planet : MonoBehaviour
     {
         foreach (PlanetResource resource in planetResources)
             resource.Update(Time.deltaTime);
+    }
+
+    public Resource TakeResource(float amount)
+    {
+        int count = planetResources.Count();
+        int resourceIndex = Random.Range(0, count);
+        return planetResources[resourceIndex].harvest(amount);
     }
 }

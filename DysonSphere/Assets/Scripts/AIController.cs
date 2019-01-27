@@ -11,9 +11,14 @@ public class AIController : MonoBehaviour
     private const float SQR_CLOSE_DISTANCE = CLOSE_DISTANCE * CLOSE_DISTANCE;
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
 
+    public enum Personality { Gatherer, Social, Hostile, Pest }
+
     private float speed = 0.7f;
 
     private RotateMe rotateMe;
+
+    private float aiDecisionPeriod = 5f;
+    private float remainingTimeToAiDecision;
 
     private void Start()
     {
@@ -21,6 +26,16 @@ public class AIController : MonoBehaviour
     }
 
     private void Update()
+    {
+        remainingTimeToAiDecision -= Time.deltaTime;
+        if (remainingTimeToAiDecision <= 0)
+        {
+            remainingTimeToAiDecision = aiDecisionPeriod * Random.Range(0.5f, 1.5f);
+            AIGetResource();
+        }
+    }
+
+    public void AIGetResource()
     {
         Vector3 target = GetBestResourceSource(transform.position);
         if (target != null && !float.IsNaN(target.x) && !float.IsNaN(target.y) && !float.IsNaN(target.z))

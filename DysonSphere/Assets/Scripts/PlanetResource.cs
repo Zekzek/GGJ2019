@@ -10,7 +10,7 @@ public class PlanetResource
     private const float MIN = 10;
 
     [SerializeField]
-    private string key;
+    private Resource.Type type;
 
     [SerializeField]
     private float max;
@@ -25,8 +25,9 @@ public class PlanetResource
 
     public float Harvestable { get { return current - MIN; } }
 
-    public PlanetResource(float max, float current, float replenPeriod)
+    public PlanetResource(Resource.Type type, float max, float current, float replenPeriod)
     {
+        this.type = type;
         this.max = max;
         this.current = current;
         this.secondsToNextReplen = this.replenPeriod = replenPeriod;
@@ -47,11 +48,11 @@ public class PlanetResource
         }
     }
 
-    public float harvest(float amount)
+    public Resource harvest(float amount)
     {
         if (amount > Harvestable)
             amount = Harvestable;
         current -= amount;
-        return amount;
+        return new Resource(type, amount);
     }
 }
