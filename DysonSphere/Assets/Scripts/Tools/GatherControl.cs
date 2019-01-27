@@ -8,7 +8,7 @@ public class GatherControl : ToolControl
     GameObject i;
     public LineRenderer line;
     public LineRenderer laserline;
-
+    public GameObject endCap;
     private LineRenderer _curLine;
 
     public GameObject GatherTxt;
@@ -102,6 +102,7 @@ public class GatherControl : ToolControl
             var dist = line.GetPosition(0) - i.transform.position;
             //var curPos = line.GetPosition(1);
             _curLine.SetPosition(1, Vector3.up * Vector3.Distance(transform.position, i.transform.position));
+            endCap.transform.localPosition = Vector3.up * Vector3.Distance(transform.position, i.transform.position);
         }
         else
         {
