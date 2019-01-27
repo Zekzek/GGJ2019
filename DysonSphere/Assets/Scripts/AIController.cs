@@ -11,6 +11,8 @@ public class AIController : MonoBehaviour
     private const float SQR_CLOSE_DISTANCE = CLOSE_DISTANCE * CLOSE_DISTANCE;
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
     private const float SQR_SHOOT_DISTANCE = SHOOT_DISTANCE * SHOOT_DISTANCE;
+    private const int ENEMY_RELATIONSHIP_LEVEL = -50;
+    private const int FRIEND_RELATIONSHIP_LEVEL = 20;
 
     private const int MULTITOOL_GUN = 0;
     private const int MULTITOOL_GATHER = 1;
@@ -31,7 +33,7 @@ public class AIController : MonoBehaviour
     private Ship targetShip;
 
     private int forgivenessValue = 5;
-    private Dictionary<Ship, int> enemies = new Dictionary<Ship, int>();
+    private Dictionary<Ship, int> relationships = new Dictionary<Ship, int>();
 
     private MultiTool multiTool;
 
@@ -90,11 +92,16 @@ public class AIController : MonoBehaviour
 
     private void DoAI()
     {
-        foreach (Ship ship in enemies.Keys.ToList())
+        List<Ship> enemies = new List<Ship>();
+
+        foreach (Ship ship in relationships.Keys.ToList())
         {
-            enemies[ship] -= forgivenessValue;
-            if (enemies[ship] <= 0)
-                enemies.Remove(ship);
+            if (relationships[ship] < ENEMY_RELATIONSHIP_LEVEL)
+            {
+                relationships[ship] += forgivenessValue;
+                if (relationships[ship] < ENEMY_RELATIONSHIP_LEVEL)
+                    enemies.Add(ship);
+            }
         }
 
         if (enemies.Count > 0)
@@ -102,7 +109,7 @@ public class AIController : MonoBehaviour
             currentTask = Task.DestroyShip;
             if (multiTool.SelectedTool != MULTITOOL_GUN)
                 multiTool.UpdateSelectedTool(MULTITOOL_GUN);
-            targetShip = GetMostHatedShip();
+            targetShip = GetMostHatedShip(enemies);
         }
         else if (Random.value < 0.5f)
         {
@@ -201,17 +208,17 @@ public class AIController : MonoBehaviour
         return bestShip;
     }
 
-    private Ship GetMostHatedShip()
+    private Ship GetMostHatedShip(List<Ship> enemies)
     {
         Ship mostHatedShip = null;
         float highestScore = 0;
-        foreach (Ship ship in enemies.Keys)
+        foreach (Ship ship in enemies)
         {
             if (ship == null)
                 continue;
             Vector3 toTarget = ship.transform.position - transform.position;
             float sqrToTargetDistance = toTarget.sqrMagnitude;
-            float score = enemies[ship] / sqrToTargetDistance;
+            float score = -relationships[ship] / sqrToTargetDistance;
 
             if (score > highestScore)
             {
@@ -247,14 +254,10 @@ public class AIController : MonoBehaviour
 
     public void TookDamageFrom(Ship ship)
     {
-        int hatred = 0;
+        if (!relationships.ContainsKey(ship))
+            relationships.Add(ship, 0);
 
-        if (enemies.ContainsKey(ship))
-        {
-            hatred = enemies[ship];
-            enemies.Remove(ship);
-        }
-        enemies.Add(ship, hatred + 100);
+        relationships[ship] -= 100;
         DoAI();
     }
 }
