@@ -60,8 +60,7 @@ public class Ship : MonoBehaviour, IScannable
         int resourceIndex = Random.Range(0, resources.Count);
         if (resources[resourceIndex].amount < amount)
         {
-            amount = 0;
-            resources[resourceIndex].amount = 0;
+            amount = resources[resourceIndex].amount;
         }
         resources[resourceIndex].amount -= amount;
 
