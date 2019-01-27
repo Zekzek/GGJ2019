@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+    path: Assets/Scenes/MainMenu.unity
+    guid: 132ec0beffa5a3643ac0ec8d7463eb7c
+  - enabled: 1
+    path: Assets/Scenes/DysonUniverse.unity
+    guid: c64bda12353195349b8916df0c5b7cf3
   m_configObjects: {}
