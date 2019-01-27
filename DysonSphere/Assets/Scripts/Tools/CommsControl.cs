@@ -10,14 +10,20 @@ public class CommsControl : ToolControl
         {
             Ship ship;
             Planet planet;
-            GetInFront(new Vector2(2, 5), out ship, out planet);
+            GetInFront(new Vector2(2, 10), out ship, out planet);
             if (ship != null)
             {
                 parentShip.TalkTo(ship);
+                GetComponentInChildren<Animator>().Play("RadioWave");
+                if (!GetComponent<AIController>())
+                {
+                    ship.transform.Find("BasicStatHUD").GetComponent<Animator>().Play("ShowStuffium");
+                }
             }
             else if (planet != null)
             {
                 parentShip.TalkTo(planet);
+                GetComponentInChildren<Animator>().Play("RadioWave");
             }
         }
     }

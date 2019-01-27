@@ -4314,6 +4314,7 @@ GameObject:
   - component: {fileID: 1369142176}
   - component: {fileID: 7505944694109743360}
   - component: {fileID: 8769312223817812358}
+  - component: {fileID: 7995419391868116931}
   m_Layer: 0
   m_Name: Ship
   m_TagString: Untagged
@@ -4545,6 +4546,25 @@ MonoBehaviour:
   hpBarDetail: {fileID: 9053203273693344530}
   hpSmoothing: 7
   hpDetailSmoothing: 2
+--- !u!232 &7995419391868116931
+DistanceJoint2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7262982851045048345}
+  m_Enabled: 1
+  serializedVersion: 4
+  m_EnableCollision: 0
+  m_ConnectedRigidBody: {fileID: 0}
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_AutoConfigureConnectedAnchor: 0
+  m_Anchor: {x: 0, y: 0}
+  m_ConnectedAnchor: {x: 0, y: 0}
+  m_AutoConfigureDistance: 0
+  m_Distance: 55
+  m_MaxDistanceOnly: 1
 --- !u!1 &7262982851986007806
 GameObject:
   m_ObjectHideFlags: 0
@@ -4788,15 +4808,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27f4cfd1b0c3e95498dacebc9b5996ef, type: 3}
---- !u!4 &1029797427715830240 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1029797426966946214, guid: 27f4cfd1b0c3e95498dacebc9b5996ef,
-    type: 3}
-  m_PrefabInstance: {fileID: 761598022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!120 &1029797427715830243 stripped
 LineRenderer:
   m_CorrespondingSourceObject: {fileID: 1029797426966946213, guid: 27f4cfd1b0c3e95498dacebc9b5996ef,
+    type: 3}
+  m_PrefabInstance: {fileID: 761598022}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &1029797427715830240 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 1029797426966946214, guid: 27f4cfd1b0c3e95498dacebc9b5996ef,
     type: 3}
   m_PrefabInstance: {fileID: 761598022}
   m_PrefabAsset: {fileID: 0}
@@ -4871,11 +4891,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2013378261742371801, guid: 1d341996ad5d3fb48b772ee901e983fa,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -11
       objectReference: {fileID: 0}
     - target: {fileID: 1301308074770885889, guid: 1d341996ad5d3fb48b772ee901e983fa,
         type: 3}
@@ -5026,6 +5041,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013378261742371801, guid: 1d341996ad5d3fb48b772ee901e983fa,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d341996ad5d3fb48b772ee901e983fa, type: 3}
@@ -5107,11 +5127,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2013378261742371801, guid: 1d341996ad5d3fb48b772ee901e983fa,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -11
-      objectReference: {fileID: 0}
     - target: {fileID: 1301308074770885889, guid: 1d341996ad5d3fb48b772ee901e983fa,
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
@@ -5261,6 +5276,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013378261742371801, guid: 1d341996ad5d3fb48b772ee901e983fa,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d341996ad5d3fb48b772ee901e983fa, type: 3}
@@ -5342,11 +5362,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2013378261742371801, guid: 1d341996ad5d3fb48b772ee901e983fa,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -11
-      objectReference: {fileID: 0}
     - target: {fileID: 1301308074770885889, guid: 1d341996ad5d3fb48b772ee901e983fa,
         type: 3}
       propertyPath: SizeModule.curve.maxCurve.m_Curve.Array.size
@@ -5496,6 +5511,11 @@ PrefabInstance:
         type: 3}
       propertyPath: ColorModule.gradient.maxGradient.m_NumAlphaKeys
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 2013378261742371801, guid: 1d341996ad5d3fb48b772ee901e983fa,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -11
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1d341996ad5d3fb48b772ee901e983fa, type: 3}

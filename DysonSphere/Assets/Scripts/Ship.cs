@@ -31,6 +31,7 @@ public class Ship : MonoBehaviour, IScannable
     private void Start()
     {
         setPreset();
+        GetComponent<DistanceJoint2D>().connectedBody = GameObject.FindGameObjectWithTag("center").GetComponent<Rigidbody2D>();
         Health = 100;
 
         GameState.Instance.AddShip(this);
