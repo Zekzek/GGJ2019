@@ -26,11 +26,11 @@ public class GatherControl : ToolControl
             if (ship != null)
             {
                 var newTxt = Instantiate(GatherTxt, transform.parent.position, Quaternion.identity);
-                
+
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
-                var amount = ship.TakeResource(50, parentShip).amount;
+                var amount = ship.TakeResource(15, parentShip).amount;
                 parentShip.AddRandomResource(amount);
 
                 newTxt.transform.GetChild(0).GetComponent<Text>().text = "+" + Mathf.RoundToInt(amount);
@@ -44,7 +44,7 @@ public class GatherControl : ToolControl
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
-                var amount = planet.TakeResource(50).amount;
+                var amount = planet.TakeResource(25).amount;
                 parentShip.AddRandomResource(amount);
 
                 newTxt.transform.GetChild(0).GetComponent<Text>().text = "+" + Mathf.RoundToInt(amount);

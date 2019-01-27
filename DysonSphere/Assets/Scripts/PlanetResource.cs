@@ -7,7 +7,7 @@ using UnityEngine;
 public class PlanetResource
 {
     private const float REPLEN_MULTIPLIER = 1.07f;
-    private const float MIN = 100;
+    private const float MIN = 25;
 
     [SerializeField]
     private Resource.Type type;

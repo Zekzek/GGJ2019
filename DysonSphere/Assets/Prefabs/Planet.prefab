@@ -49,7 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   planetResources:
   - type: 0
-    max: 1000
+    max: 250
     current: 100
     replenPeriod: 1
 --- !u!58 &7559284811009557451
