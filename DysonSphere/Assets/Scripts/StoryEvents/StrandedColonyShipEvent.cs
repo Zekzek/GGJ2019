@@ -5,6 +5,7 @@ public class StrandedColonyShipEvent : ChoiceEvent
 {
 	public StrandedColonyShipEvent()
 	{
+        title = "A Request for Aid";
 		scenario = "You discover a stranded colony ship asking for aid.";
 
 		options = new List<Option>()
