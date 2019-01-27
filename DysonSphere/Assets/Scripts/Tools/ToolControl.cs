@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class ToolControl : MonoBehaviour
 {
     protected Ship parentShip;
-    public void Start()
+    public void Awake()
     {
         parentShip = GetComponentInParent<Ship>();
     }
