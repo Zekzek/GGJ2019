@@ -31,7 +31,17 @@ public abstract class ChoiceEvent
 
 	public static ChoiceEvent GenerateRandomChoiceEvent()
 	{
-		return new StrandedColonyShipEvent();
+		return new ChanceResults<ChoiceEvent>()
+		{
+			{
+				1,
+				new StrandedColonyShipEvent()
+			},
+			{
+				1,
+				new NewIdeaEvent()
+			},
+		}.PickOne();
 	}
 
 	protected class ChanceResults<T> : IEnumerable
