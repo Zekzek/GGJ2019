@@ -16,10 +16,17 @@ public class MultiTool : MonoBehaviour
 
     public Vector3 Target;
     private float _rotSpeed = 2000f;
+
+    private AudioSource _switchSound;
     public float lookSpeed;
 
     public float toolCooldownPeriod = 0.5f;
     private float toolCooldownRemaining = 0;
+
+    public void Start()
+    {
+        _switchSound = GetComponent<AudioSource>();
+    }
 
     public void UpdateSelectedTool(int newSelection)
     {
@@ -38,6 +45,11 @@ public class MultiTool : MonoBehaviour
         }
 
         Tools[_selectedTool].SetActive(true);
+
+        if(Tools[_selectedTool].GetComponent<ToolControl>().PlayerShip())
+        {
+            _switchSound.Play();
+        }
     }
 
     public GameObject cooldownCircle;
