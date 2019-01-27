@@ -15,7 +15,7 @@ public class GunControl : ToolControl
     {
         if (parentShip != null)
         {
-            if (parentShip.TotalResources > resourceCost)
+            if (parentShip.TotalResources >= resourceCost)
             {
                 Shoot(GunEnds[barrelIndex]);
                 parentShip.TakeResource(resourceCost);

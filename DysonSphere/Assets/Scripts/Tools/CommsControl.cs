@@ -8,7 +8,7 @@ public class CommsControl : ToolControl
 
     public override void DoActivate()
     {
-        if (parentShip != null && parentShip.TotalResources > resourceCost)
+        if (parentShip != null && parentShip.TotalResources >= resourceCost)
         {
             Ship ship;
             Planet planet;
