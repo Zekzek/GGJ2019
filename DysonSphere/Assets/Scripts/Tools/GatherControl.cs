@@ -7,6 +7,8 @@ public class GatherControl : ToolControl
 {
     GameObject i;
     public LineRenderer line;
+    public LineRenderer laserline;
+
     public GameObject GatherTxt;
 
     public override void DoActivate()
@@ -19,7 +21,7 @@ public class GatherControl : ToolControl
             if (ship != null)
             {
                 var newTxt = Instantiate(GatherTxt, transform.parent.position, Quaternion.identity);
-
+                laserline.gameObject.SetActive(true);
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
@@ -33,7 +35,7 @@ public class GatherControl : ToolControl
             else if (planet != null)
             {
                 var newTxt = Instantiate(GatherTxt, transform.parent.position, Quaternion.identity);
-
+                laserline.gameObject.SetActive(true);
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
@@ -47,6 +49,8 @@ public class GatherControl : ToolControl
             else
             {
                 i = (null);
+                laserline.gameObject.SetActive(false);
+
             }
         }
     }
