@@ -26,6 +26,8 @@ public class GatherControl : ToolControl
                 var amount = ship.TakeResource(50).amount;
                 parentShip.AddRandomResource(amount);
 
+                newTxt.transform.GetChild(0).GetComponent<Text>().text = "+" + Mathf.RoundToInt(amount);
+
                 i = (ship.gameObject);
             }
             else if (planet != null)
@@ -37,6 +39,8 @@ public class GatherControl : ToolControl
 
                 var amount = planet.TakeResource(50).amount;
                 parentShip.AddRandomResource(amount);
+
+                newTxt.transform.GetChild(0).GetComponent<Text>().text = "+" + Mathf.RoundToInt(amount);
 
                 i = (planet.gameObject);
             }
