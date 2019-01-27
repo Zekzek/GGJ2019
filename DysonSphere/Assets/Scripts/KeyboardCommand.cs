@@ -19,5 +19,25 @@ public class KeyboardCommand : MonoBehaviour
         _ship.ThrustPos = Input.GetAxis("Horizontal");
         _ship.ThrustVel = Input.GetAxis("Vertical");
         _tool.Target = Input.mousePosition;
+
+        if(Input.GetKey("1"))
+        {
+            _tool.SelectedTool = 0;
+        }
+
+        if (Input.GetKey("2"))
+        {
+            _tool.SelectedTool = 1;
+        }
+
+        if (Input.GetKey("3"))
+        {
+            _tool.SelectedTool = 2;
+        }
+
+        if(Input.GetMouseButtonDown(1))
+        {
+            _tool.SelectedTool = _tool.SelectedTool + 1;
+        }
     }
 }
