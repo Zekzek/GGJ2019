@@ -12,8 +12,7 @@ public class StoryEventController : MonoBehaviour
 				instance = FindObjectOfType<StoryEventController>();
 				if (instance == null)
 				{
-					GameObject go = new GameObject("StoryEventController");
-					instance = go.AddComponent<StoryEventController>();
+					instance = Resources.Load<StoryEventController>("StoryEventController");
 				}
 			}
 
@@ -31,11 +30,16 @@ public class StoryEventController : MonoBehaviour
 
 	private StoryEventResultUI resultUIInstance;
 
-	float nextEventTime = PickNextEventTime();
+	float nextEventTime;
 
 	private static float PickNextEventTime()
 	{
 		return Random.Range(60, 120) + Time.time;
+	}
+
+	private void Awake()
+	{
+		nextEventTime = PickNextEventTime();
 	}
 
 	public void Update()
