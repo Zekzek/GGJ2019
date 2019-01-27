@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class PlanetResource
 {
-    private const float REPLEN_MULTIPLIER = 1.15f;
+    private const float REPLEN_MULTIPLIER = 1.07f;
     private const float MIN = 100;
 
     [SerializeField]

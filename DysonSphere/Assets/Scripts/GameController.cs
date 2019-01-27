@@ -11,22 +11,45 @@ public class GameController : MonoBehaviour
     public Transform planetWrapper;
     public Transform aiShipWrapper;
 
+    private const float MIN_CLUSTER_DISTANCE = 12;
+    private const float SQR_MIN_CLUSTER_DISTANCE = MIN_CLUSTER_DISTANCE * MIN_CLUSTER_DISTANCE;
+
+    private int retryCounter;
+
     void Start()
     {
-        for (int i = 0; i < 11; i++)
+        List<Vector2> usedPoints = new List<Vector2>();
+        usedPoints.Add(Vector2.zero); //Player position
+
+        for (int i = 0; i < 15; i++)
         {
-            float x = 10 * (i - 5) + Random.Range(1, 9);
-            float y = Random.Range(-50, 50);
-            Instantiate(planetPrefab, new Vector3(x, y, 0), Quaternion.identity, planetWrapper);
+            Vector2 point = Vector2.zero;
+            while (point == Vector2.zero || !IsInOpenSpace(usedPoints, point))
+                point = Random.Range(0.15f, 1f) * Random.insideUnitCircle * 55;
+            usedPoints.Add(point);
+            Instantiate(planetPrefab, point, Quaternion.identity, planetWrapper);
         }
 
-        for (int i = 0; i < 11; i++)
+        for (int i = 0; i < 9; i++)
         {
-            float x = 10 * (i - 5) + Random.Range(1, 9);
-            float y = Random.Range(-50, 50);
-            Instantiate(aiShipPrefab, new Vector3(x, y, 0), Quaternion.identity, aiShipWrapper);
+            Vector2 point = Vector2.zero;
+            while (point == Vector2.zero || !IsInOpenSpace(usedPoints, point))
+                point = Random.Range(0.15f, 1f) * Random.insideUnitCircle * 55;
+            usedPoints.Add(point);
+            Instantiate(aiShipPrefab, point, Quaternion.identity, aiShipWrapper);
         }
+
+        Debug.Log("Placed things on 24 of " + retryCounter + "attempts");
 
         GameState.Instance.player.OnResourceChange?.Invoke();
+    }
+
+    private bool IsInOpenSpace(List<Vector2> usedPoints, Vector2 prospectivePoint)
+    {
+        retryCounter++;
+        foreach (Vector2 point in usedPoints)
+            if ((point - prospectivePoint).sqrMagnitude < SQR_MIN_CLUSTER_DISTANCE)
+                return false;
+        return true;
     }
 }
