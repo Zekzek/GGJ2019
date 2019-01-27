@@ -3703,6 +3703,7 @@ MonoBehaviour:
   - {fileID: 1290921906}
   Target: {x: 0, y: 0, z: 0}
   lookSpeed: 6
+  toolCooldownPeriod: 0.5
 --- !u!1 &6338207744570816447
 GameObject:
   m_ObjectHideFlags: 0
@@ -4009,6 +4010,8 @@ MonoBehaviour:
   - {fileID: 927140964}
   - {fileID: 673425042}
   - {fileID: 1763492294}
+  explosion: {fileID: 1456019728954605789, guid: 18fc6667d7c51d54685f9ee7d8090dce,
+    type: 3}
 --- !u!1 &7262982851986007806
 GameObject:
   m_ObjectHideFlags: 0

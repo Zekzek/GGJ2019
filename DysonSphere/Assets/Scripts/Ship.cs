@@ -8,6 +8,7 @@ public class Ship : MonoBehaviour
     public SpriteRenderer[] landDetailSpr;
     public SpriteRenderer[] waterSpr;
     public SpriteRenderer[] windSpr;
+    public GameObject explosion;
     private List<Resource> resources = new List<Resource>();
     public int Health { get; set; }
     private AIController ai;
@@ -65,6 +66,7 @@ public class Ship : MonoBehaviour
 
     private void Die()
     {
+        Instantiate(explosion, transform.position, Quaternion.identity);
         GameState.Instance.RemoveShip(this);
         Destroy(gameObject);
     }
