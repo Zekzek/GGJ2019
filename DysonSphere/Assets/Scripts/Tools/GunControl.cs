@@ -24,9 +24,12 @@ public class GunControl : ToolControl
             }
             else
             {
-                aud = GetComponent<AudioSource>();
-                aud.pitch = Random.Range(0.5f, 1.5f);
-                aud.PlayOneShot(outClip);
+                if (PlayerShip())
+                {
+                    aud = GetComponent<AudioSource>();
+                    aud.pitch = Random.Range(0.5f, 1.5f);
+                    aud.PlayOneShot(outClip);
+                }
             }
         }
     }
