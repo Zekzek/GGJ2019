@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
+using System;
 
 public class PlayerState
 {
+    public Action OnResourceChange;
     public Ship Ship { get; set; }
     public int Health { get { return Ship.Health; } set { Ship.Health = value; } }
     public float Resources
@@ -23,6 +25,8 @@ public class PlayerState
             {
                 Ship.AddRandomResource(value - Ship.TotalResources);
             }
+
+            OnResourceChange?.Invoke();
         }
     }
     public int Unrest { get; set; }

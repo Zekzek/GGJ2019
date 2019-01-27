@@ -11,7 +11,6 @@ public class KeyboardCommand : MonoBehaviour
     {
         _tool = GetComponentInChildren<MultiTool>();
         _ship = GetComponentInChildren<RotateMe>();
-        GameState.Instance.player.Ship = GetComponent<Ship>();
     }
 
     // Update is called once per frame

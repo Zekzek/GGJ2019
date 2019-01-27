@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class Ship : MonoBehaviour, IScannable
 {
     public PlanetPresetDB planetDB;
     public SpriteRenderer[] landDetailSpr;
@@ -33,12 +33,22 @@ public class Ship : MonoBehaviour
         GameState.Instance.AddShip(this);
         resources.Add(new Resource(Resource.Type.Stuffium, 100));
         ai = GetComponent<AIController>();
+
+        if(PlayerShip())
+        {
+            GameState.Instance.player.Ship = GetComponent<Ship>();
+        }
     }
 
     public void AddRandomResource(float amount)
     {
         int resourceIndex = Random.Range(0, resources.Count);
         resources[resourceIndex].amount += amount;
+
+        if (PlayerShip())
+        {
+            GameState.Instance.player.OnResourceChange?.Invoke();
+        }
     }
 
     public Resource TakeResource(float amount)
@@ -104,5 +114,15 @@ public class Ship : MonoBehaviour
     public void TalkTo(Planet planet)
     {
         //TODO
+    }
+
+    public void ScanMe()
+    {
+        // Pop up a display that shows resources.
+    }
+
+    public bool PlayerShip()
+    {
+        return ai == null;
     }
 }

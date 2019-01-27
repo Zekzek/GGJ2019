@@ -26,5 +26,7 @@ public class GameController : MonoBehaviour
             float y = Random.Range(-50, 50);
             Instantiate(aiShipPrefab, new Vector3(x, y, 0), Quaternion.identity, aiShipWrapper);
         }
+
+        GameState.Instance.player.OnResourceChange?.Invoke();
     }
 }
