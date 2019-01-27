@@ -5,19 +5,26 @@ using UnityEngine;
 public class GunControl : ToolControl
 {
     public GameObject bullet, muzzleFlash;
-
+    public float spreadAmount;
     public Transform[] GunEnds;
+    public int barrelIndex = 0;
 
     public override void DoActivate()
     {
-        Debug.Log("GUN");
-        foreach (Transform t in GunEnds)
+        Shoot(GunEnds[barrelIndex]);
+    }
+
+    public void Shoot(Transform t)
+    {
+        var newbullet = Instantiate(bullet, t.position, transform.parent.rotation);
+        newbullet.transform.Rotate(0, 0, Random.Range(-spreadAmount, spreadAmount));
+        var newFlash = Instantiate(muzzleFlash, t.position, transform.parent.rotation, t);
+        var m = newFlash.GetComponent<ParticleSystem>().main;
+        m.startRotation = transform.parent.rotation.eulerAngles.y-90 * Mathf.Deg2Rad;
+        barrelIndex += 1;
+        if (barrelIndex == GunEnds.Length)
         {
-            if(t.name == "GunEnd")
-            {
-                Instantiate(bullet, t.transform.position, transform.parent.rotation);
-                Instantiate(muzzleFlash, t.transform);
-            }
+            barrelIndex = 0;
         }
     }
 }
