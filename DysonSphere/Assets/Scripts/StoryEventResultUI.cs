@@ -11,17 +11,14 @@ public class StoryEventResultUI : MonoBehaviour
 	[SerializeField]
 	private Button okButton;
 
-	private StoryEventController storyEventController;
-
-	public void Setup(string result, StoryEventController storyEventController)
+	public void Setup(string result)
 	{
 		resultText.SetText(result);
 		okButton.onClick.AddListener(OnClick);
-		this.storyEventController = storyEventController;
 	}
 
 	public void OnClick()
 	{
-		storyEventController.CloseResults();
+		StoryEventController.Instance.CloseResults();
 	}
 }
