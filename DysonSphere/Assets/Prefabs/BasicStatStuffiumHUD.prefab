@@ -355,6 +355,7 @@ GameObject:
   - component: {fileID: 7970409948056485070}
   - component: {fileID: 7970409948056485064}
   - component: {fileID: 7970409948056485065}
+  - component: {fileID: 3720393694589739975}
   m_Layer: 5
   m_Name: Base
   m_TagString: Untagged
@@ -419,3 +420,15 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!225 &3720393694589739975
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7970409948056485071}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0

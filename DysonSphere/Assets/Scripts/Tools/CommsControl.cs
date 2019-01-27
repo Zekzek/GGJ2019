@@ -26,6 +26,10 @@ public class CommsControl : ToolControl
             {
                 parentShip.TalkTo(planet);
                 GetComponentInChildren<Animator>().Play("RadioWave");
+                if (!GetComponent<AIController>())
+                {
+                    planet.transform.Find("BasicStatStuffiumHUD").GetComponent<Animator>().Play("ShowStuffium");
+                }
             }
             parentShip.TakeResource(resourceCost);
         }
