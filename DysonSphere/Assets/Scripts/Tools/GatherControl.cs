@@ -13,7 +13,7 @@ public class GatherControl : ToolControl
         {
             Ship ship;
             Planet planet;
-            GetInFront(new Vector2(100, 2), out ship, out planet);
+            GetInFront(new Vector2(2, 5), out ship, out planet);
             if (ship != null)
             {
                 parentShip.AddRandomResource(ship.TakeResource(50).amount);
@@ -40,14 +40,10 @@ public class GatherControl : ToolControl
         GetInFront(new Vector2(2, 5), out ship, out planet);
         if (ship != null)
         {
-            parentShip.AddRandomResource(ship.TakeResource(50).amount);
-
             i = (ship.gameObject);
         }
         else if (planet != null)
         {
-            parentShip.AddRandomResource(planet.TakeResource(50).amount);
-
             i = (planet.gameObject);
         }
         else
