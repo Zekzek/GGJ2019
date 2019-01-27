@@ -9,8 +9,8 @@ public class KeyboardCommand : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        _tool = GetComponent<MultiTool>();
-        _ship = GetComponent<RotateMe>();
+        _tool = GetComponentInChildren<MultiTool>();
+        _ship = GetComponentInChildren<RotateMe>();
     }
 
     // Update is called once per frame
