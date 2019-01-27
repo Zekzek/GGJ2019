@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &1140082931
+--- !u!114 &6325549141236724153
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -108,6 +108,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 965011680, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
+    - {fileID: 1369142176, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
 --- !u!1 &8628306505096227543 stripped
 GameObject:
