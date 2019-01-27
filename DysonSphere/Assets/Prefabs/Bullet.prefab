@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8424566756805536756}
   - component: {fileID: 3128679702213187281}
   - component: {fileID: 9132319261291769107}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Fire
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4726,7 +4726,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7753952992115506010}
   - component: {fileID: 7753952992115506011}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Circle (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4805,7 +4805,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7753952992287736517}
   - component: {fileID: 7753952992287736522}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4884,7 +4884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7753952992505722021}
   - component: {fileID: 7753952992505722026}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Square (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4963,7 +4963,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7753952993394583842}
   - component: {fileID: 7753952993394583843}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Circle (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5044,7 +5044,7 @@ GameObject:
   - component: {fileID: 537701780}
   - component: {fileID: 537701782}
   - component: {fileID: 537701781}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Bullet
   m_TagString: Bullet
   m_Icon: {fileID: 0}
@@ -5078,7 +5078,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7753952993743345793}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -5131,7 +5131,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7753952993937770251}
   - component: {fileID: 7753952993937770248}
-  m_Layer: 0
+  m_Layer: 11
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
