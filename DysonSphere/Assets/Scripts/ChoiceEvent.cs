@@ -19,6 +19,7 @@ public abstract class ChoiceEvent
 		}
 	}
 
+    public string title;
 	public string scenario;
 	public List<Option> options;
 

@@ -7,6 +7,8 @@ public class UnrestEvent : ChoiceEvent
 {
     public UnrestEvent()
     {
+        title = "Crew Moral Conflict";
+
         scenario = "Your crew has become unhappy and are making demands!";
 
         options = new List<Option>()
