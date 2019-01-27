@@ -30,7 +30,7 @@ public class Planet : MonoBehaviour, IScannable
     {
         foreach (PlanetResource resource in planetResources)
             resource.Update(Time.deltaTime);
-		transform.localScale = Vector3.one * Mathf.Sqrt((TotalResources / 100f));
+		transform.localScale = Vector3.one * Mathf.Sqrt(((TotalResources+100) / 100f));
     }
 
     public Resource TakeResource(float amount)
