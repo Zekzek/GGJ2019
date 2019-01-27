@@ -5045,7 +5045,7 @@ GameObject:
   - component: {fileID: 537701782}
   - component: {fileID: 537701781}
   m_Layer: 11
-  m_Name: Bullet
+  m_Name: Bullet 1
   m_TagString: Bullet
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5121,7 +5121,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 15
-  hitForce: 3.4028235e+38
+  hitForce: 5
 --- !u!1 &7753952993937770250
 GameObject:
   m_ObjectHideFlags: 0
