@@ -42,6 +42,8 @@ public class NewIdeaEvent : ChoiceEvent
 				}
 			}.PickOne();
 
+        title = "Research Opportunity";
+
 		scenario = string.Format("One of your crew has an idea to imrove the {0}.", upgrade.scenarioItem);
 
 		options = new List<Option>()

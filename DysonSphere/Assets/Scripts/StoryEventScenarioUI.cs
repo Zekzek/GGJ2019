@@ -18,6 +18,7 @@ public class StoryEventScenarioUI : Popup
 
 	public void Setup(ChoiceEvent choiceEvent)
 	{
+        titleText.SetText(choiceEvent.title);
 		scenarioText.SetText(choiceEvent.scenario);
 		foreach (ChoiceEvent.Option option in choiceEvent.options)
 		{
