@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class CommsControl : ToolControl
 {
+    protected int resourceCost = 5;
+
     public override void DoActivate()
     {
-        if (parentShip != null)
+        if (parentShip != null && parentShip.TotalResources > resourceCost)
         {
             Ship ship;
             Planet planet;
@@ -25,6 +27,7 @@ public class CommsControl : ToolControl
                 parentShip.TalkTo(planet);
                 GetComponentInChildren<Animator>().Play("RadioWave");
             }
+            parentShip.TakeResource(resourceCost);
         }
     }
 }

@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GunControl : ToolControl
 {
+    protected int resourceCost = 25;
+
     public GameObject bullet, muzzleFlash;
     public float spreadAmount;
     public Transform[] GunEnds;
@@ -13,7 +15,12 @@ public class GunControl : ToolControl
     {
         if (parentShip != null)
         {
-            Shoot(GunEnds[barrelIndex]);
+            if (parentShip.TotalResources > resourceCost)
+            {
+                Shoot(GunEnds[barrelIndex]);
+                parentShip.TakeResource(resourceCost);
+            }
+            else { }
         }
     }
 
