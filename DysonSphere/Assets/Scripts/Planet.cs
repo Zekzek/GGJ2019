@@ -30,6 +30,7 @@ public class Planet : MonoBehaviour
     {
         foreach (PlanetResource resource in planetResources)
             resource.Update(Time.deltaTime);
+		transform.localScale = Vector3.one * Mathf.Sqrt((TotalResources / 100f));
     }
 
     public Resource TakeResource(float amount)
