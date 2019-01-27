@@ -56,22 +56,34 @@ public class AIController : MonoBehaviour
         if (currentTask == Task.DestroyShip)
         {
             if (targetShip != null)
+            {
                 GetCloserOrActivateMultiTool(targetShip.transform.position, SQR_SHOOT_DISTANCE);
+                multiTool.Target = targetShip.transform.position;
+            }
         }
         if (currentTask == Task.HarvestFromPlanet)
         {
             if (targetPlanet != null)
+            {
                 GetCloserOrActivateMultiTool(targetPlanet.transform.position, CLOSE_DISTANCE);
+                multiTool.Target = targetPlanet.transform.position;
+            }
         }
         else if (currentTask == Task.StealFromShip)
         {
             if (targetShip != null)
+            {
                 GetCloserOrActivateMultiTool(targetShip.transform.position, CLOSE_DISTANCE);
+                multiTool.Target = targetShip.transform.position;
+            }
         }
         else if (currentTask == Task.TalkToShip)
         {
             if (targetShip != null)
+            {
                 GetCloserOrActivateMultiTool(targetShip.transform.position, CLOSE_DISTANCE);
+                multiTool.Target = targetShip.transform.position;
+            }
         }
 
     }
@@ -114,7 +126,6 @@ public class AIController : MonoBehaviour
             targetShip = GetBestResourceShip(transform.position);
         }
     }
-
 
     private void GetCloserOrActivateMultiTool(Vector3 target, float sqrDistance)
     {

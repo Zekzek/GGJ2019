@@ -18,7 +18,7 @@ public class KeyboardCommand : MonoBehaviour
     {
         _ship.ThrustPos = Input.GetAxis("Horizontal");
         _ship.ThrustVel = Input.GetAxis("Vertical");
-        _tool.Target = Input.mousePosition;
+        _tool.Target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (Input.GetKey("1"))
         {
