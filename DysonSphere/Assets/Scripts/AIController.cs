@@ -106,7 +106,6 @@ public class AIController : MonoBehaviour
                 multiTool.Target = targetShip.transform.position;
             }
         }
-
     }
 
     private void DoAI()
@@ -277,6 +276,15 @@ public class AIController : MonoBehaviour
             relationships.Add(ship, 0);
 
         relationships[ship] -= 100;
+        DoAI();
+    }
+
+    public void Appreciate(Ship ship)
+    {
+        if (!relationships.ContainsKey(ship))
+            relationships.Add(ship, 0);
+
+        relationships[ship] += 10;
         DoAI();
     }
 }

@@ -55,7 +55,7 @@ public class Ship : MonoBehaviour, IScannable
         }
     }
 
-    public Resource TakeResource(float amount)
+    public Resource TakeResource(float amount, Ship damageSource)
     {
         int resourceIndex = Random.Range(0, resources.Count);
         if (resources[resourceIndex].amount < amount)
@@ -68,6 +68,9 @@ public class Ship : MonoBehaviour, IScannable
         {
             GameState.Instance.player.OnResourceChange?.Invoke();
         }
+
+        if (ai != null && damageSource != null)
+            ai.TookDamageFrom(damageSource);
 
         return new Resource(resources[resourceIndex].type, amount);
     }
@@ -114,6 +117,12 @@ public class Ship : MonoBehaviour, IScannable
             sp.color = planetDB.planets[i].cloudColor;
         }
 
+    }
+
+    public void Appreciate(Ship ship)
+    {
+        if (ai != null)
+            ai.Appreciate(ship);
     }
 
     public void TalkTo(Ship ship)

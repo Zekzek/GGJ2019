@@ -23,7 +23,7 @@ public class GatherControl : ToolControl
                 if (newTxt != null)
                     Destroy(newTxt, 1);
 
-                var amount = ship.TakeResource(50).amount;
+                var amount = ship.TakeResource(50, parentShip).amount;
                 parentShip.AddRandomResource(amount);
 
                 newTxt.transform.GetChild(0).GetComponent<Text>().text = "+" + Mathf.RoundToInt(amount);

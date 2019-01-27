@@ -19,7 +19,7 @@ public class PlayerState
 
             if (value < Ship.TotalResources)
             {
-                Ship.TakeResource(Ship.TotalResources - value);
+                Ship.TakeResource(Ship.TotalResources - value, null);
             }
             else
             {

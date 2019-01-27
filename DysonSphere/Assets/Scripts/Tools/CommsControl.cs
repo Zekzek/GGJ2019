@@ -15,6 +15,7 @@ public class CommsControl : ToolControl
             GetInFront(new Vector2(2, 10), out ship, out planet);
             if (ship != null)
             {
+                ship.Appreciate(parentShip);
                 parentShip.TalkTo(ship);
                 GetComponentInChildren<Animator>().Play("RadioWave");
                 if (!GetComponent<AIController>())
@@ -31,7 +32,7 @@ public class CommsControl : ToolControl
                     planet.transform.Find("BasicStatStuffiumHUD").GetComponent<Animator>().Play("ShowStuffium");
                 }
             }
-            parentShip.TakeResource(resourceCost);
+            parentShip.TakeResource(resourceCost, null);
         }
     }
 }
