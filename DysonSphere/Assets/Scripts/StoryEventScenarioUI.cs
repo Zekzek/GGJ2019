@@ -15,6 +15,7 @@ public class StoryEventScenarioUI : MonoBehaviour
 
 	public void Setup(ChoiceEvent choiceEvent)
 	{
+		scenarioText.SetText(choiceEvent.scenario);
 		foreach (ChoiceEvent.Option option in choiceEvent.options)
 		{
 			StoryEventOptionUI optionUI = Instantiate(optionPrefab, optionList);
