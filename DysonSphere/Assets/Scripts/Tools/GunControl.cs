@@ -12,6 +12,7 @@ public class GunControl : ToolControl
     public int barrelIndex = 0;
     private AudioSource aud;
     public AudioClip outClip;
+    public AudioClip shotClip;
 
     public override void DoActivate()
     {
@@ -21,6 +22,11 @@ public class GunControl : ToolControl
             {
                 Shoot(GunEnds[barrelIndex]);
                 parentShip.TakeResource(resourceCost, null);
+
+                aud = GetComponent<AudioSource>();
+                aud.pitch = Random.Range(0.5f, 1.5f);
+                aud.PlayOneShot(shotClip);
+                aud.volume = 0.3f;
             }
             else
             {
@@ -29,6 +35,7 @@ public class GunControl : ToolControl
                     aud = GetComponent<AudioSource>();
                     aud.pitch = Random.Range(0.5f, 1.5f);
                     aud.PlayOneShot(outClip);
+                    aud.volume = 0.55f;
                 }
             }
         }
