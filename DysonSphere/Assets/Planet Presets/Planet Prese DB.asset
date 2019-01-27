@@ -13,4 +13,8 @@ MonoBehaviour:
   m_Name: Planet Prese DBt
   m_EditorClassIdentifier: 
   planets:
+  - {fileID: 11400000, guid: f679e511f8f82d8428f5c2dda07f7854, type: 2}
   - {fileID: 11400000, guid: 829a47c20428e0f489d8d7bc91e1214b, type: 2}
+  - {fileID: 11400000, guid: 4352e4805e3bc674ca0bb15f73bb8225, type: 2}
+  - {fileID: 11400000, guid: 3bb516f2ffb1f78499db8ead7281e87e, type: 2}
+  - {fileID: 11400000, guid: ec8e05241318216488147121db082b33, type: 2}
