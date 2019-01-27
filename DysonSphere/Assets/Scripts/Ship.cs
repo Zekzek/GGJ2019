@@ -43,4 +43,14 @@ public class Ship : MonoBehaviour
 
         return new Resource(resources[resourceIndex].type, amount);
     }
+
+    public void TalkTo(Ship ship)
+    {
+        //TODO
+    }
+
+    public void TalkTo(Planet planet)
+    {
+        //TODO
+    }
 }
