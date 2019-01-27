@@ -7,6 +7,21 @@ public class Planet : MonoBehaviour
 {
     private static List<Planet> planets = new List<Planet>();
     public static Vector3[] PlanetPositions { get { return planets.Select(x => x.transform.position).ToArray(); } }
+    public static Planet[] Planets { get { return planets.ToArray(); } }
+
+    public float TotalResources
+    {
+        get
+        {
+            float total = 0;
+            foreach (PlanetResource resource in planetResources)
+            {
+                total += resource.Harvestable;
+            }
+            return total;
+        }
+    }
+
 
     [SerializeField]
     private PlanetResource[] planetResources;
