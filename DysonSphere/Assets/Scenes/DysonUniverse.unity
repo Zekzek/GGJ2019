@@ -411,7 +411,7 @@ Camera:
   far clip plane: 5000
   field of view: 40
   orthographic: 1
-  orthographic size: 8.9
+  orthographic size: 16
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -5360,7 +5360,7 @@ MonoBehaviour:
   m_Follow: {fileID: 1095662800}
   m_Lens:
     FieldOfView: 40
-    OrthographicSize: 8.9
+    OrthographicSize: 16
     NearClipPlane: 0.1
     FarClipPlane: 5000
     Dutch: 0
@@ -5524,11 +5524,6 @@ PrefabInstance:
       propertyPath: lookSpeed
       value: 6
       objectReference: {fileID: 0}
-    - target: {fileID: 7268774893087040733, guid: 3abc32633ba650c41847b704706f1d0e,
-        type: 3}
-      propertyPath: m_SortingOrder
-      value: -10
-      objectReference: {fileID: 0}
     - target: {fileID: 6917106385757563201, guid: 3abc32633ba650c41847b704706f1d0e,
         type: 3}
       propertyPath: m_RootOrder
@@ -5538,6 +5533,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7268774893087040733, guid: 3abc32633ba650c41847b704706f1d0e,
+        type: 3}
+      propertyPath: m_SortingOrder
+      value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
