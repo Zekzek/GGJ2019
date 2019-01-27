@@ -2357,9 +2357,11 @@ MonoBehaviour:
   bullet: {fileID: 7753952993743345793, guid: f94b6ec9a0663704880d3346b5839a22, type: 3}
   muzzleFlash: {fileID: 3411007985167111879, guid: 28b937be2a3da5a4ca00481c41c6f2d7,
     type: 3}
+  spreadAmount: 8
   GunEnds:
   - {fileID: 48626339}
   - {fileID: 526673866}
+  barrelIndex: 0
 --- !u!1 &1290921906
 GameObject:
   m_ObjectHideFlags: 0
@@ -3991,6 +3993,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b362a952c4440b64eb09ae88ab62cde4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  planetDB: {fileID: 11400000, guid: bbd690402baf67245863f912620bb64b, type: 2}
+  landDetailSpr:
+  - {fileID: 1679109307}
+  - {fileID: 564083987}
+  - {fileID: 490852559}
+  - {fileID: 1782614982}
+  waterSpr:
+  - {fileID: 1066883130}
+  - {fileID: 1481770548}
+  - {fileID: 371290861}
+  - {fileID: 1149710769}
+  windSpr:
+  - {fileID: 1201261751}
+  - {fileID: 927140964}
+  - {fileID: 673425042}
+  - {fileID: 1763492294}
 --- !u!1 &7262982851986007806
 GameObject:
   m_ObjectHideFlags: 0
