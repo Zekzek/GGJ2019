@@ -8,7 +8,7 @@ public class MultiTool : MonoBehaviour
     public int SelectedTool
     {
         get { return _selectedTool; }
-        set { UpdateSelectedTool(value);}
+        set { UpdateSelectedTool(value); }
     }
 
     private int _selectedTool = 0;
@@ -17,7 +17,10 @@ public class MultiTool : MonoBehaviour
     private float _rotSpeed = 2000f;
     public float lookSpeed;
 
-    void UpdateSelectedTool(int newSelection)
+    public float toolCooldownPeriod = 0.5f;
+    private float toolCooldownRemaining = 0;
+
+    public void UpdateSelectedTool(int newSelection)
     {
         if (newSelection >= 0 && newSelection < Tools.Count)
         {
@@ -28,7 +31,7 @@ public class MultiTool : MonoBehaviour
             _selectedTool = 0;
         }
 
-        foreach(var t in Tools)
+        foreach (var t in Tools)
         {
             t.SetActive(false);
         }
@@ -38,7 +41,11 @@ public class MultiTool : MonoBehaviour
 
     public void ActivateMultiTool()
     {
-        Tools[_selectedTool].GetComponent<ToolControl>().DoActivate();
+        if (toolCooldownRemaining <= 0)
+        {
+            Tools[_selectedTool].GetComponent<ToolControl>().DoActivate();
+            toolCooldownRemaining = toolCooldownPeriod;
+        }
     }
 
     void Update()
@@ -48,5 +55,10 @@ public class MultiTool : MonoBehaviour
 
         float rot_z = Mathf.Atan2(diff.y, diff.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(0f, 0f, rot_z - 90), Time.deltaTime * lookSpeed);
+
+        if (toolCooldownRemaining > 0)
+        {
+            toolCooldownRemaining -= Time.deltaTime;
+        }
     }
 }

@@ -11,16 +11,24 @@ public class GunControl : ToolControl
 
     public override void DoActivate()
     {
-        Shoot(GunEnds[barrelIndex]);
+        if (parentShip != null)
+        {
+            Shoot(GunEnds[barrelIndex]);
+        }
     }
 
     public void Shoot(Transform t)
     {
         var newbullet = Instantiate(bullet, t.position, transform.parent.rotation);
         newbullet.transform.Rotate(0, 0, Random.Range(-spreadAmount, spreadAmount));
+
+        Bullet bulletBullet = newbullet.GetComponent<Bullet>();
+        bulletBullet.parentShip = parentShip;
+
         var newFlash = Instantiate(muzzleFlash, t.position, transform.parent.rotation, t);
         var m = newFlash.GetComponent<ParticleSystem>().main;
-        m.startRotation = transform.parent.rotation.eulerAngles.y-90 * Mathf.Deg2Rad;
+        m.startRotation = transform.parent.rotation.eulerAngles.y - 90 * Mathf.Deg2Rad;
+
         barrelIndex += 1;
         if (barrelIndex == GunEnds.Length)
         {

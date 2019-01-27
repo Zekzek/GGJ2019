@@ -1,27 +1,39 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 public class AIController : MonoBehaviour
 {
     private const float CLOSE_DISTANCE = 20;
     private const float TARGET_DISTANCE = 4;
     private const float CLOSE_ANGLE = 0.35f;
+    private const float SHOOT_DISTANCE = 10;
     private const float SQR_CLOSE_DISTANCE = CLOSE_DISTANCE * CLOSE_DISTANCE;
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
+    private const float SQR_SHOOT_DISTANCE = SHOOT_DISTANCE * SHOOT_DISTANCE;
+
+    private const int MULTITOOL_GUN = 0;
+    private const int MULTITOOL_GATHER = 1;
+    private const int MULTITOOL_COMMS = 2;
 
     public enum Personality { Gatherer, Social, Hostile, Pest }
-    private enum Task { HarvestFromPlanet, StealFromShip, TalkToShip }
+    private enum Task { HarvestFromPlanet, StealFromShip, TalkToShip, DestroyShip }
     private Task currentTask;
 
     private float speed = 0.7f;
 
     private RotateMe rotateMe;
 
-    private float aiDecisionPeriod = 5f;
+    private float aiDecisionPeriod = 0.5f;
     private float remainingTimeToAiDecision = 0;
 
     private Planet targetPlanet;
     private Ship targetShip;
+
+    private int forgivenessValue = 5;
+    private Dictionary<Ship, int> enemies = new Dictionary<Ship, int>();
+
+    private MultiTool multiTool;
 
     private void Start()
     {
@@ -29,6 +41,7 @@ public class AIController : MonoBehaviour
         var keyboardCommand = GetComponent<KeyboardCommand>();
         if (keyboardCommand != null)
             keyboardCommand.enabled = false;
+        multiTool = GetComponentInChildren<MultiTool>();
     }
 
     private void Update()
@@ -40,30 +53,75 @@ public class AIController : MonoBehaviour
             DoAI();
         }
 
+        if (currentTask == Task.DestroyShip)
+        {
+            if (targetShip != null)
+                GetCloserOrActivateMultiTool(targetShip.transform.position, SQR_SHOOT_DISTANCE);
+        }
         if (currentTask == Task.HarvestFromPlanet)
         {
             if (targetPlanet != null)
-                Go(targetPlanet.transform.position);
+                GetCloserOrActivateMultiTool(targetPlanet.transform.position, CLOSE_DISTANCE);
         }
         else if (currentTask == Task.StealFromShip)
         {
             if (targetShip != null)
-                Go(targetShip.transform.position);
+                GetCloserOrActivateMultiTool(targetShip.transform.position, CLOSE_DISTANCE);
         }
+        else if (currentTask == Task.TalkToShip)
+        {
+            if (targetShip != null)
+                GetCloserOrActivateMultiTool(targetShip.transform.position, CLOSE_DISTANCE);
+        }
+
     }
 
     private void DoAI()
     {
-        if (Random.value < 0.5f)
+        foreach (Ship ship in enemies.Keys.ToList())
+        {
+            enemies[ship] -= forgivenessValue;
+            if (enemies[ship] <= 0)
+                enemies.Remove(ship);
+        }
+
+        if (enemies.Count > 0)
+        {
+            currentTask = Task.DestroyShip;
+            if (multiTool.SelectedTool != MULTITOOL_GUN)
+                multiTool.UpdateSelectedTool(MULTITOOL_GUN);
+            targetShip = GetMostHatedShip();
+        }
+        else if (Random.value < 0.5f)
         {
             currentTask = Task.HarvestFromPlanet;
+            if (multiTool.SelectedTool != MULTITOOL_GATHER)
+                multiTool.UpdateSelectedTool(MULTITOOL_GATHER);
             targetPlanet = GetBestResourcePlanet(transform.position);
+        }
+        else if (Random.value < 0.5f)
+        {
+            currentTask = Task.StealFromShip;
+            if (multiTool.SelectedTool != MULTITOOL_GATHER)
+                multiTool.UpdateSelectedTool(MULTITOOL_GATHER);
+            targetShip = GetBestResourceShip(transform.position);
         }
         else
         {
-            currentTask = Task.StealFromShip;
+            currentTask = Task.TalkToShip;
+            if (multiTool.SelectedTool != MULTITOOL_COMMS)
+                multiTool.UpdateSelectedTool(MULTITOOL_COMMS);
             targetShip = GetBestResourceShip(transform.position);
         }
+    }
+
+
+    private void GetCloserOrActivateMultiTool(Vector3 target, float sqrDistance)
+    {
+        if ((target - transform.position).sqrMagnitude > sqrDistance)
+            Go(target);
+        else
+            multiTool.ActivateMultiTool();
     }
 
     private void Go(Vector3 target)
@@ -132,6 +190,27 @@ public class AIController : MonoBehaviour
         return bestShip;
     }
 
+    private Ship GetMostHatedShip()
+    {
+        Ship mostHatedShip = null;
+        float highestScore = 0;
+        foreach (Ship ship in enemies.Keys)
+        {
+            if (ship == null)
+                continue;
+            Vector3 toTarget = ship.transform.position - transform.position;
+            float sqrToTargetDistance = toTarget.sqrMagnitude;
+            float score = enemies[ship] / sqrToTargetDistance;
+
+            if (score > highestScore)
+            {
+                mostHatedShip = ship;
+                highestScore = score;
+            }
+        }
+        return mostHatedShip;
+    }
+
     private static Vector3 GetDirectionToClosestPlanet(Vector3 source)
     {
         return GetClosest(source, GameState.Instance.PlanetPositions) - source;
@@ -157,6 +236,14 @@ public class AIController : MonoBehaviour
 
     public void TookDamageFrom(Ship ship)
     {
-        //TODO: hate them
+        int hatred = 0;
+
+        if (enemies.ContainsKey(ship))
+        {
+            hatred = enemies[ship];
+            enemies.Remove(ship);
+        }
+        enemies.Add(ship, hatred + 100);
+        DoAI();
     }
 }

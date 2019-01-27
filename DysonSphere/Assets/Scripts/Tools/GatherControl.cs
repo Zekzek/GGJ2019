@@ -6,16 +6,19 @@ public class GatherControl : ToolControl
 {
     public override void DoActivate()
     {
-        Ship ship;
-        Planet planet;
-        GetInFront(new Vector2(2, 5), out ship, out planet);
-        if (ship != null)
+        if (parentShip != null)
         {
-            parentShip.AddRandomResource(ship.TakeResource(50).amount);
-        }
-        else if (planet != null)
-        {
-            parentShip.AddRandomResource(planet.TakeResource(50).amount);
+            Ship ship;
+            Planet planet;
+            GetInFront(new Vector2(2, 5), out ship, out planet);
+            if (ship != null)
+            {
+                parentShip.AddRandomResource(ship.TakeResource(50).amount);
+            }
+            else if (planet != null)
+            {
+                parentShip.AddRandomResource(planet.TakeResource(50).amount);
+            }
         }
     }
 }
