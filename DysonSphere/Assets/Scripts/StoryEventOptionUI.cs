@@ -14,18 +14,15 @@ public class StoryEventOptionUI : MonoBehaviour
 
 	private ChoiceEvent.Option option;
 
-	private StoryEventController storyEventController;
-
-	public void Setup(ChoiceEvent.Option option, StoryEventController storyEventController)
+	public void Setup(ChoiceEvent.Option option)
 	{
 		this.option = option;
 		optionText.SetText(option.option);
 		optionButton.onClick.AddListener(ClickListener);
-		this.storyEventController = storyEventController;
 	}
 
 	private void ClickListener()
 	{
-		storyEventController.PickOption(option);
+		StoryEventController.Instance.PickOption(option);
 	}
 }

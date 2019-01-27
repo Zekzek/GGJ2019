@@ -29,7 +29,7 @@ public abstract class ChoiceEvent
 		this.options = new List<Option>(options);
 	}
 
-	public static ChoiceEvent GenerateRandomChoiceEvent(GameState gameState)
+	public static ChoiceEvent GenerateRandomChoiceEvent()
 	{
 		return new StrandedColonyShipEvent();
 	}
@@ -51,20 +51,25 @@ public abstract class ChoiceEvent
 		public Func<string> PickOne()
 		{
 			float f = UnityEngine.Random.Range(0, possibilities.Sum(p => p.Item1));
-			Func<string> result = () => "";
+			Func<string> result = () => "<Error>";
 			foreach (Tuple<float, Func<string>> possibility in possibilities)
 			{
+				result = possibility.Item2;
 				f -= possibility.Item1;
 				if (f < 0)
 					break;
-
-				result = possibility.Item2;
 			}
 			return result;
 		}
 	}
 }
-
+public static class ListChoiceEventOption_EXT
+{
+	public static void Add(this List<ChoiceEvent.Option> options, string optionText, Func<string> OnChoosen)
+	{
+		options.Add(new ChoiceEvent.Option(optionText, OnChoosen));
+	}
+}
 
 public class StrandedColonyShipEvent : ChoiceEvent
 {
@@ -72,89 +77,93 @@ public class StrandedColonyShipEvent : ChoiceEvent
 	{
 		scenario = "You discover a stranded colony ship asking for aid. Do you :";
 
-		options.Add(new Option(
-			"Ignore them",
-			() =>
+		options = new List<Option>()
+		{
 			{
-				return "You ignore them";
-			}));
-
-		options.Add(new Option(
-			"Destroy them",
-			() =>
-			{
-				return new ChanceResults()
+				"Ignore them",
+				() =>
 				{
-					{
-						100,
-						()=>
-						{
-							int damage = UnityEngine.Random.Range(1,300);
-							PlayerState player = GameState.Instance.player;
-							int newHealth = player.Health - damage;
-
-							player.Health = Math.Max(1,newHealth);
-							if(newHealth <= 100)
-							{
-								return "They return fire, nearly destroying your ship.";
-							}
-							else
-							{
-								player.Health = newHealth;
-					 			return "They return fire, but they were no match for you.";
-							}
-					 	}
-					},
-					{
-						100,
-						() =>
-						{
-					 			return "They are unable to return fire and are destroyed.";
-						}
-
-					}
-				}.PickOne().Invoke();
-			}));
-
-		options.Add(new Option(
-			"Assist them",
-			() =>
+					return "You ignore them";
+				}
+			},
 			{
-				return new ChanceResults()
+				"Destroy them",
+				() =>
 				{
+					return new ChanceResults()
 					{
-						10,
-						()=>
 						{
-							int damage = UnityEngine.Random.Range(1,600);
-							PlayerState player = GameState.Instance.player;
-							int newHealth = player.Health - damage;
+							100,
+							()=> {
+								int damage = UnityEngine.Random.Range(1,300);
+								PlayerState player = GameState.Instance.player;
+								int newHealth = player.Health - damage;
 
-							player.Health = Math.Max(1,newHealth);
-							if(newHealth <= 100)
-							{
-								return "It was a Trap. They nearly destroy your ship.";
-							}
-							else
-							{
-								player.Health = newHealth;
-					 			return "It was a Trap, but they were no match for you.";
-							}
-					 	}
-					},
-					{
-						100,
-						() =>
+								player.Health = Math.Max(1,newHealth);
+								if(newHealth <= 100)
+								{
+									return "They return fire, nearly destroying your ship.";
+								}
+								else
+								{
+									player.Health = newHealth;
+						 			return "They return fire, but they were no match for you.";
+								}
+						 	}
+						},
 						{
-					 		
-							PlayerState player = GameState.Instance.player;
-							player.Resources += UnityEngine.Random.Range(100,600);
-							return "They are grateful and give you resources.";
+							100,
+							() => {
+						 			return "They are unable to return fire and are destroyed.";
+							}
+
 						}
+					}.PickOne().Invoke();
+				}
+			},
+			{
+				"Assist them",
+				() =>
+				{
+					return new ChanceResults()
+					{
+						{
+							10,
+							()=> {
+								int damage = UnityEngine.Random.Range(1,600);
+								PlayerState player = GameState.Instance.player;
+								int newHealth = player.Health - damage;
 
-					}
-				}.PickOne().Invoke();
-			}));
+								player.Health = Math.Max(1,newHealth);
+								if(newHealth <= 100)
+								{
+									return "It was a Trap. They nearly destroy your ship.";
+								}
+								else
+								{
+									player.Health = newHealth;
+						 			return "It was a Trap, but they were no match for you.";
+								}
+						 	}
+						},
+						{
+							50,
+							() => {
+								return "They are grateful.";
+							}
+						},
+						{
+							50,
+							() => {
 
+								PlayerState player = GameState.Instance.player;
+								player.Resources += UnityEngine.Random.Range(100,600);
+								return "They are grateful and give you resources.";
+							}
+						}
+					}.PickOne().Invoke();
+				}
+			}
+		};
 	}
 }

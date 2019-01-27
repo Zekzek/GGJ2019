@@ -13,12 +13,12 @@ public class StoryEventScenarioUI : MonoBehaviour
 	[SerializeField]
 	private Transform optionList;
 
-	public void Setup(ChoiceEvent choiceEvent, StoryEventController storyEventController)
+	public void Setup(ChoiceEvent choiceEvent)
 	{
 		foreach (ChoiceEvent.Option option in choiceEvent.options)
 		{
 			StoryEventOptionUI optionUI = Instantiate(optionPrefab, optionList);
-			optionUI.Setup(option, storyEventController);
+			optionUI.Setup(option);
 		}
 	}
 }
