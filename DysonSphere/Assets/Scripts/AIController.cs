@@ -18,7 +18,76 @@ public class AIController : MonoBehaviour
     private const int MULTITOOL_GATHER = 1;
     private const int MULTITOOL_COMMS = 2;
 
-    public enum Personality { Gatherer, Social, Hostile, Pest }
+    private int shotAnger = 100;
+    private int theftAnger = 10;
+    private int commsJoy = 10;
+    private int forgivenessValue = 5;
+
+    private float chanceToRetaliate = 0.75f;
+    private float chanceToAttack = 0.05f;
+    private float chanceToGather = 0.35f;
+    private float chanceToSteal = 0.25f;
+    private float chanceToTalk = 0.35f;
+
+    public enum Personality { Default, Gatherer, Social, Hostile, Pest }
+    private Personality personality;
+    public Personality Temperment
+    {
+        get { return personality; }
+        set
+        {
+            personality = value;
+            if (personality == Personality.Social)
+            {
+                shotAnger = 50;
+                theftAnger = 10;
+                commsJoy = 20;
+                forgivenessValue = 10;
+                chanceToRetaliate = 0.5f;
+                chanceToAttack = 0;
+                chanceToGather = 0.6f;
+                chanceToSteal = 0;
+                chanceToTalk = 0.4f;
+            }
+            else if (personality == Personality.Hostile)
+            {
+                shotAnger = 200;
+                theftAnger = 50;
+                commsJoy = 5;
+                forgivenessValue = 5;
+                chanceToRetaliate = 1;
+                chanceToAttack = 0.3f;
+                chanceToGather = 0.5f;
+                chanceToSteal = 0;
+                chanceToTalk = 0.1f;
+            }
+            else if (personality == Personality.Pest)
+            {
+                shotAnger = 20;
+                theftAnger = 50;
+                commsJoy = 5;
+                forgivenessValue = 5;
+                chanceToRetaliate = 0.5f;
+                chanceToAttack = 0f;
+                chanceToGather = 0.1f;
+                chanceToSteal = 0.8f;
+                chanceToTalk = 0.1f;
+            }
+            else if (personality == Personality.Gatherer)
+            {
+                shotAnger = 50;
+                theftAnger = 50;
+                commsJoy = 10;
+                forgivenessValue = 7;
+                chanceToRetaliate = 0.5f;
+                chanceToAttack = 0f;
+                chanceToGather = 0.9f;
+                chanceToSteal = 0f;
+                chanceToTalk = 0.1f;
+            }
+        }
+    }
+
     private enum Task { HarvestFromPlanet, StealFromShip, TalkToShip, DestroyShip }
     private Task currentTask;
 
@@ -51,10 +120,10 @@ public class AIController : MonoBehaviour
     private Planet targetPlanet;
     private Ship targetShip;
 
-    private int forgivenessValue = 5;
     private Dictionary<Ship, int> relationships = new Dictionary<Ship, int>();
 
     private MultiTool multiTool;
+    private Ship myShip;
 
     private void Start()
     {
@@ -63,6 +132,8 @@ public class AIController : MonoBehaviour
         if (keyboardCommand != null)
             keyboardCommand.enabled = false;
         multiTool = GetComponentInChildren<MultiTool>();
+        Temperment = (Personality)Random.Range(0, 5);
+        myShip = GetComponent<Ship>();
     }
 
     private void Update()
@@ -76,23 +147,19 @@ public class AIController : MonoBehaviour
 
         if (currentTask == Task.DestroyShip)
         {
-            if (targetShip != null)
+            if (targetShip == null || !CanShoot())
+                DoAI();
+            else
             {
                 GetCloserOrActivateMultiTool(targetShip.transform.position, SQR_SHOOT_DISTANCE);
                 multiTool.Target = targetShip.transform.position;
             }
         }
-        if (currentTask == Task.HarvestFromPlanet)
-        {
-            if (targetPlanet != null)
-            {
-                GetCloserOrActivateMultiTool(targetPlanet.transform.position, CLOSE_DISTANCE);
-                multiTool.Target = targetPlanet.transform.position;
-            }
-        }
         else if (currentTask == Task.StealFromShip)
         {
-            if (targetShip != null)
+            if (targetShip == null)
+                DoAI();
+            else
             {
                 GetCloserOrActivateMultiTool(targetShip.transform.position, CLOSE_DISTANCE);
                 multiTool.Target = targetShip.transform.position;
@@ -100,10 +167,20 @@ public class AIController : MonoBehaviour
         }
         else if (currentTask == Task.TalkToShip)
         {
-            if (targetShip != null)
+            if (targetShip == null || !CanTalk())
+                DoAI();
+            else
             {
                 GetCloserOrActivateMultiTool(targetShip.transform.position, CLOSE_DISTANCE);
                 multiTool.Target = targetShip.transform.position;
+            }
+        }
+        else if (currentTask == Task.HarvestFromPlanet)
+        {
+            if (targetPlanet != null)
+            {
+                GetCloserOrActivateMultiTool(targetPlanet.transform.position, CLOSE_DISTANCE);
+                multiTool.Target = targetPlanet.transform.position;
             }
         }
     }
@@ -122,33 +199,41 @@ public class AIController : MonoBehaviour
             }
         }
 
-        if (enemies.Count > 0)
+        float randomValue = Random.value;
+        if (enemies.Count > 0 && CanShoot() && Random.value < chanceToRetaliate)
         {
             currentTask = Task.DestroyShip;
             if (multiTool.SelectedTool != MULTITOOL_GUN)
                 multiTool.UpdateSelectedTool(MULTITOOL_GUN);
             targetShip = GetMostHatedShip(enemies);
         }
-        else if (Random.value < 0.5f)
-        {
-            currentTask = Task.HarvestFromPlanet;
-            if (multiTool.SelectedTool != MULTITOOL_GATHER)
-                multiTool.UpdateSelectedTool(MULTITOOL_GATHER);
-            targetPlanet = GetBestResourcePlanet(transform.position);
-        }
-        else if (Random.value < 0.5f)
+        else if (randomValue < chanceToSteal)
         {
             currentTask = Task.StealFromShip;
             if (multiTool.SelectedTool != MULTITOOL_GATHER)
                 multiTool.UpdateSelectedTool(MULTITOOL_GATHER);
             targetShip = GetBestResourceShip(transform.position);
         }
-        else
+        else if (randomValue < chanceToTalk && CanTalk())
         {
             currentTask = Task.TalkToShip;
             if (multiTool.SelectedTool != MULTITOOL_COMMS)
                 multiTool.UpdateSelectedTool(MULTITOOL_COMMS);
             targetShip = GetBestResourceShip(transform.position);
+        }
+        else if (randomValue < chanceToAttack && CanShoot())
+        {
+            currentTask = Task.StealFromShip;
+            if (multiTool.SelectedTool != MULTITOOL_GUN)
+                multiTool.UpdateSelectedTool(MULTITOOL_GUN);
+            targetShip = GetBestResourceShip(transform.position);
+        }
+        else
+        {
+            currentTask = Task.HarvestFromPlanet;
+            if (multiTool.SelectedTool != MULTITOOL_GATHER)
+                multiTool.UpdateSelectedTool(MULTITOOL_GATHER);
+            targetPlanet = GetBestResourcePlanet(transform.position);
         }
     }
 
@@ -275,7 +360,16 @@ public class AIController : MonoBehaviour
         if (!relationships.ContainsKey(ship))
             relationships.Add(ship, 0);
 
-        relationships[ship] -= 100;
+        relationships[ship] -= shotAnger;
+        DoAI();
+    }
+
+    public void VictimOfTheftFrom(Ship ship)
+    {
+        if (!relationships.ContainsKey(ship))
+            relationships.Add(ship, 0);
+
+        relationships[ship] -= theftAnger;
         DoAI();
     }
 
@@ -284,7 +378,18 @@ public class AIController : MonoBehaviour
         if (!relationships.ContainsKey(ship))
             relationships.Add(ship, 0);
 
-        relationships[ship] += 10;
+        relationships[ship] += commsJoy;
         DoAI();
     }
+
+    private bool CanShoot()
+    {
+        return myShip.TotalResources >= 25;
+    }
+
+    private bool CanTalk()
+    {
+        return myShip.TotalResources >= 5;
+    }
+
 }

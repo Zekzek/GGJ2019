@@ -13,7 +13,7 @@ public class Ship : MonoBehaviour, IScannable
     public int Health { get; set; }
     private AIController ai;
 
-	int maxHealth = 100;
+    int maxHealth = 100;
 
     public AIController.RelationshipStatus PlayerRelationShip { get { return ai == null ? AIController.RelationshipStatus.Neutral : ai.PlayerRelationship; } }
 
@@ -46,19 +46,19 @@ public class Ship : MonoBehaviour, IScannable
         }
     }
 
-	private float lastHealTime;
-	private void Update()
-	{
-		if (Health > 0 && Health < maxHealth && TotalResources > 1 && lastHealTime +1 < Time.time)
-		{
-			lastHealTime = Mathf.FloorToInt(Time.time);
+    private float lastHealTime;
+    private void Update()
+    {
+        if (Health > 0 && Health < maxHealth && TotalResources > 1 && lastHealTime + 1 < Time.time)
+        {
+            lastHealTime = Mathf.FloorToInt(Time.time);
 
-			Health++;
-			TakeResource(1);
-		}
-	}
+            Health++;
+            TakeResource(1);
+        }
+    }
 
-	public void AddRandomResource(float amount)
+    public void AddRandomResource(float amount)
     {
         int resourceIndex = Random.Range(0, resources.Count);
         resources[resourceIndex].amount += amount;
@@ -84,7 +84,7 @@ public class Ship : MonoBehaviour, IScannable
         }
 
         if (ai != null && damageSource != null)
-            ai.TookDamageFrom(damageSource);
+            ai.VictimOfTheftFrom(damageSource);
 
         return new Resource(resources[resourceIndex].type, amount);
     }

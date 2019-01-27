@@ -388,6 +388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0c885cf307fc4a218e0e9c96adc5b5b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  titleText: {fileID: 3401881894987531662}
   optionPrefab: {fileID: 8801031480757429916, guid: 468380bc6df104cae8c14d5387f5af4e,
     type: 3}
   scenarioText: {fileID: 6305004955353045605}

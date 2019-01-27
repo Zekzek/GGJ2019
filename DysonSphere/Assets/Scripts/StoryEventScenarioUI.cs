@@ -5,6 +5,9 @@ using TMPro;
 public class StoryEventScenarioUI : Popup
 {
 	[SerializeField]
+	private TextMeshProUGUI titleText;
+
+	[SerializeField]
 	private StoryEventOptionUI optionPrefab;
 
 	[SerializeField]
