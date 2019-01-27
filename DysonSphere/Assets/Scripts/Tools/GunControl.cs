@@ -8,11 +8,6 @@ public class GunControl : ToolControl
 
     public Transform[] GunEnds;
 
-    private void Start()
-    {
-        Destroy(gameObject, 6);
-    }
-
     public override void DoActivate()
     {
         Debug.Log("GUN");
