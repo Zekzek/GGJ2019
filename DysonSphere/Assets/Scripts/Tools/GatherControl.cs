@@ -16,13 +16,15 @@ public class GatherControl : ToolControl
             GetInFront(new Vector2(2, 5), out ship, out planet);
             if (ship != null)
             {
-                parentShip.AddRandomResource(ship.TakeResource(50).amount);
+                var amount = ship.TakeResource(50).amount;
+                parentShip.AddRandomResource(amount);
 
                 i = (ship.gameObject);
             }
             else if (planet != null)
             {
-                parentShip.AddRandomResource(planet.TakeResource(50).amount);
+                var amount = planet.TakeResource(50).amount;
+                parentShip.AddRandomResource(amount);
 
                 i = (planet.gameObject);
             }
