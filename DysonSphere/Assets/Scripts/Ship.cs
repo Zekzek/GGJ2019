@@ -68,6 +68,7 @@ public class Ship : MonoBehaviour
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
         GameState.Instance.RemoveShip(this);
+        GameState.Instance.CheckWin();
         Destroy(gameObject);
     }
 
