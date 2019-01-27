@@ -45,6 +45,10 @@ public abstract class ChoiceEvent
             {
                 (float) Math.Pow(GameState.Instance.player.Unrest / 10, 2),
                 new UnrestEvent()
+            },
+            {
+                0.75f,
+                new EquipmentBreakdownEvent()
             }
 		}.PickOne();
 	}
