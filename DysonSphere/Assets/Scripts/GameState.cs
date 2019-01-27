@@ -62,17 +62,12 @@ public class GameState : MonoBehaviour
             win = false;
             over = true;
         }
-        else if (ships.Count == 0)
-        {
-            win = true;
-            over = true;
-        }
         else
         {
             bool allFriends = true;
             foreach (Ship ship in ships)
             {
-                if (ship.PlayerRelationShip != AIController.RelationshipStatus.Ally)
+                if (!ship.PlayerShip() && ship.PlayerRelationShip != AIController.RelationshipStatus.Ally)
                 {
                     allFriends = false;
                     break;
@@ -87,16 +82,16 @@ public class GameState : MonoBehaviour
 
         if (over)
         {
-			if (win)
-			{
-				PopupManager.Show(Resources.Load<VictoryPopup>("UI/Victory Popup"));
-			}
-			else
-			{
-				PopupManager.Show(Resources.Load<DefeatPopup>("UI/Defeat Popup"));
-			}
+            if (win)
+            {
+                PopupManager.Show(Resources.Load<VictoryPopup>("UI/Victory Popup"));
+            }
+            else
+            {
+                PopupManager.Show(Resources.Load<DefeatPopup>("UI/Defeat Popup"));
+            }
 
-			Debug.Log("Game over!!!");
+            Debug.Log("Game over!!!");
         }
 
         return over;
