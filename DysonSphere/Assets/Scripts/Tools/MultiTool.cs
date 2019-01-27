@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MultiTool : MonoBehaviour
 {
@@ -39,12 +40,15 @@ public class MultiTool : MonoBehaviour
         Tools[_selectedTool].SetActive(true);
     }
 
+    public GameObject cooldownCircle;
     public void ActivateMultiTool()
     {
         if (toolCooldownRemaining <= 0)
         {
+            cooldownCircle.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
             Tools[_selectedTool].GetComponent<ToolControl>().DoActivate();
             toolCooldownRemaining = toolCooldownPeriod;
+            cooldownCircle.transform.GetChild(1).transform.localScale = Vector3.one;
         }
     }
 
@@ -59,6 +63,8 @@ public class MultiTool : MonoBehaviour
         if (toolCooldownRemaining > 0)
         {
             toolCooldownRemaining -= Time.deltaTime;
+            cooldownCircle.transform.GetChild(0).GetComponent<Image>().fillAmount -= Time.deltaTime * (1 / toolCooldownPeriod);
+            cooldownCircle.transform.GetChild(1).transform.localScale -= Vector3.one * (Time.deltaTime * (1 / toolCooldownPeriod));
         }
     }
 }
