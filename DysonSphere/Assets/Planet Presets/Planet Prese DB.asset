@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e392e222c6953124888cf5ff11d5752d, type: 3}
-  m_Name: Planet Prese DBt
+  m_Name: Planet Prese DB
   m_EditorClassIdentifier: 
   planets:
   - {fileID: 11400000, guid: f679e511f8f82d8428f5c2dda07f7854, type: 2}
