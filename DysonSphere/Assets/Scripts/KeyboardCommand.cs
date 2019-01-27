@@ -11,6 +11,7 @@ public class KeyboardCommand : MonoBehaviour
     {
         _tool = GetComponentInChildren<MultiTool>();
         _ship = GetComponentInChildren<RotateMe>();
+        GameState.Instance.player.Ship = GetComponent<Ship>();
     }
 
     // Update is called once per frame
@@ -20,7 +21,7 @@ public class KeyboardCommand : MonoBehaviour
         _ship.ThrustVel = Input.GetAxis("Vertical");
         _tool.Target = Input.mousePosition;
 
-        if(Input.GetKey("1"))
+        if (Input.GetKey("1"))
         {
             _tool.SelectedTool = 0;
         }
@@ -35,12 +36,12 @@ public class KeyboardCommand : MonoBehaviour
             _tool.SelectedTool = 2;
         }
 
-        if(Input.GetMouseButtonDown(1))
+        if (Input.GetMouseButtonDown(1))
         {
             _tool.SelectedTool = _tool.SelectedTool + 1;
         }
 
-        if(Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(0))
         {
             _tool.ActivateMultiTool();
         }

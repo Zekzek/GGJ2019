@@ -25,10 +25,15 @@ public class Ship : MonoBehaviour
         resources.Add(new Resource(Resource.Type.Stuffium, 100));
     }
 
+    public void AddRandomResource(float amount)
+    {
+        int resourceIndex = Random.Range(0, resources.Count);
+        resources[resourceIndex].amount += amount;
+    }
+
     public Resource TakeResource(float amount)
     {
-        int count = resources.Count;
-        int resourceIndex = Random.Range(0, count);
+        int resourceIndex = Random.Range(0, resources.Count);
         if (resources[resourceIndex].amount < amount)
         {
             amount = 0;

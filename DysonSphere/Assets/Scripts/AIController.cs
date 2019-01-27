@@ -18,7 +18,7 @@ public class AIController : MonoBehaviour
     private RotateMe rotateMe;
 
     private float aiDecisionPeriod = 5f;
-    private float remainingTimeToAiDecision;
+    private float remainingTimeToAiDecision = 0;
 
     private Planet targetPlanet;
     private Ship targetShip;
@@ -54,7 +54,7 @@ public class AIController : MonoBehaviour
 
     private void DoAI()
     {
-        if (Random.value < 0.1f)
+        if (Random.value < 0.5f)
         {
             currentTask = Task.HarvestFromPlanet;
             targetPlanet = GetBestResourcePlanet(transform.position);
