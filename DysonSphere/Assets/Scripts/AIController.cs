@@ -7,7 +7,7 @@ public class AIController : MonoBehaviour
     private const float CLOSE_DISTANCE = 20;
     private const float TARGET_DISTANCE = 4;
     private const float CLOSE_ANGLE = 0.35f;
-    private const float SHOOT_DISTANCE = 10;
+    private const float SHOOT_DISTANCE = 17;
     private const float SQR_CLOSE_DISTANCE = CLOSE_DISTANCE * CLOSE_DISTANCE;
     private const float SQR_TARGET_DISTANCE = TARGET_DISTANCE * TARGET_DISTANCE;
     private const float SQR_SHOOT_DISTANCE = SHOOT_DISTANCE * SHOOT_DISTANCE;
