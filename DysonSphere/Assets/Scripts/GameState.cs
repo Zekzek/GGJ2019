@@ -69,12 +69,19 @@ public class GameState : MonoBehaviour
         }
         else
         {
+            bool allFriends = true;
             foreach (Ship ship in ships)
             {
-                //if (!ship.Allied)
+                if (ship.PlayerRelationShip != AIController.RelationshipStatus.Ally)
                 {
+                    allFriends = false;
                     break;
                 }
+            }
+            if (allFriends)
+            {
+                win = true;
+                over = true;
             }
         }
 
