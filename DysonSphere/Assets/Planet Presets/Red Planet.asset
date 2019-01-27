@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1f67c5d11f5426d4c8f50588617a52fe, type: 3}
+  m_Name: Red Planet
+  m_EditorClassIdentifier: 
+  windspeed: 1.3
+  spinspeed: 0.8
+  landDetailColor: {r: 0.49056602, g: 0.277545, b: 0.16429335, a: 1}
+  landColor: {r: 1, g: 0.2943648, b: 0, a: 1}
+  waterColor: {r: 0.10893556, g: 0.33522207, b: 0.4528302, a: 1}
+  cloudColor: {r: 0.7264151, g: 0.6793547, b: 0.36663404, a: 0.78431374}
