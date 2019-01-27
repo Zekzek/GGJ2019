@@ -45,10 +45,15 @@ public class MultiTool : MonoBehaviour
     {
         if (toolCooldownRemaining <= 0)
         {
-            cooldownCircle.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
-            Tools[_selectedTool].GetComponent<ToolControl>().DoActivate();
+            var tool = Tools[_selectedTool].GetComponent<ToolControl>();
+            tool.DoActivate();
             toolCooldownRemaining = toolCooldownPeriod;
-            cooldownCircle.transform.GetChild(1).transform.localScale = Vector3.one;
+
+            if (tool.PlayerShip())
+            {
+                cooldownCircle.transform.GetChild(0).GetComponent<Image>().fillAmount = 1;
+                cooldownCircle.transform.GetChild(1).transform.localScale = Vector3.one;
+            }
         }
     }
 
@@ -62,9 +67,14 @@ public class MultiTool : MonoBehaviour
 
         if (toolCooldownRemaining > 0)
         {
+            var tool = Tools[_selectedTool].GetComponent<ToolControl>();
             toolCooldownRemaining -= Time.deltaTime;
-            cooldownCircle.transform.GetChild(0).GetComponent<Image>().fillAmount -= Time.deltaTime * (1 / toolCooldownPeriod);
-            cooldownCircle.transform.GetChild(1).transform.localScale -= Vector3.one * (Time.deltaTime * (1 / toolCooldownPeriod));
+
+            if (tool.PlayerShip())
+            {
+                cooldownCircle.transform.GetChild(0).GetComponent<Image>().fillAmount -= Time.deltaTime * (1 / toolCooldownPeriod);
+                cooldownCircle.transform.GetChild(1).transform.localScale -= Vector3.one * (Time.deltaTime * (1 / toolCooldownPeriod));
+            }
         }
     }
 }

@@ -50,5 +50,10 @@ public abstract class ToolControl : MonoBehaviour
         }
     }
 
+    public bool PlayerShip()
+    {
+        return parentShip.PlayerShip();
+    }
+
     public abstract void DoActivate();
 }
