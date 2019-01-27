@@ -4943,6 +4943,12 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
+--- !u!1 &276265674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4730044228996677988, guid: 7a62f4baef587db4aa504bfa8befb5e1,
+    type: 3}
+  m_PrefabInstance: {fileID: 1222037507}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &460837355
 GameObject:
   m_ObjectHideFlags: 0
@@ -5179,6 +5185,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4730044227556001165, guid: 7a62f4baef587db4aa504bfa8befb5e1,
+        type: 3}
+      propertyPath: Tools.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4730044227556001165, guid: 7a62f4baef587db4aa504bfa8befb5e1,
+        type: 3}
+      propertyPath: Tools.Array.data[0]
+      value: 
+      objectReference: {fileID: 276265674}
     m_RemovedComponents:
     - {fileID: 4730044229061805115, guid: 7a62f4baef587db4aa504bfa8befb5e1, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 7a62f4baef587db4aa504bfa8befb5e1, type: 3}
@@ -5472,7 +5488,7 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.060653254, g: 0.2017571, b: 0.2735849, a: 0.105882354}
+      minColor: {r: 0.060653254, g: 0.2017571, b: 0.2735849, a: 0.08235294}
       maxColor: {r: 0.05098038, g: 0.27450982, b: 0.20921847, a: 0.11372549}
       maxGradient:
         serializedVersion: 2
@@ -10282,8 +10298,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.10196076, g: 0.4599824, b: 0.54901963, a: 0.3019608}
-      maxColor: {r: 0.09411765, g: 0.5294118, b: 0.33173677, a: 0.32156864}
+      minColor: {r: 0.10196076, g: 0.4599824, b: 0.54901963, a: 0.14117648}
+      maxColor: {r: 0.09411765, g: 0.5294118, b: 0.33173677, a: 0.1254902}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -14708,23 +14724,3 @@ ParticleSystem:
         m_PostInfinity: 2
         m_RotationOrder: 4
     vectorLabel1_3: W
---- !u!1 &2126198544 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4730044229061805113, guid: 7a62f4baef587db4aa504bfa8befb5e1,
-    type: 3}
-  m_PrefabInstance: {fileID: 1222037507}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2126198546
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2126198544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 665bc97e78e87cd4f8e547fb409f7313, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Target: {x: 0, y: 0, z: 0}
-  lookSpeed: 0
