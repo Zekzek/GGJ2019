@@ -20077,5 +20077,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1965687195737837497, guid: 3abc32633ba650c41847b704706f1d0e,
+        type: 3}
+      propertyPath: GatherTxt
+      value: 
+      objectReference: {fileID: 3639100887414448080, guid: e0ce33225a381bb499c4db018f5a0bf9,
+        type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
