@@ -15,6 +15,6 @@ public class StuffiumDisplayText : MonoBehaviour
 
     void UpdateText()
     {
-        _resourceDisplay.text = "x<b>" + GameState.Instance.player.Resources + "</b>";
+        _resourceDisplay.text = "x<b>" + Mathf.FloorToInt(GameState.Instance.player.Resources) + "</b>";
     }
 }
