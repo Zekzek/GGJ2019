@@ -12,18 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921dec98c86a79942930453d1bf5bbb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &991552674544294256
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7986530341886790434}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 258da773bbfd6684f8af7fbaec2a3318, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1402496769204603945
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -195,6 +183,11 @@ PrefabInstance:
       propertyPath: Tools.Array.data[2]
       value: 
       objectReference: {fileID: 1402496767943191451}
+    - target: {fileID: 3286041385554733571, guid: 3abc32633ba650c41847b704706f1d0e,
+        type: 3}
+      propertyPath: cooldownCircle
+      value: 
+      objectReference: {fileID: 4351931551703468490}
     - target: {fileID: 5420503103715263272, guid: 3abc32633ba650c41847b704706f1d0e,
         type: 3}
       propertyPath: m_Layer
@@ -293,7 +286,8 @@ PrefabInstance:
       propertyPath: hpBarDetail
       value: 
       objectReference: {fileID: 7986530342305005371}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3319939870523981770, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 3abc32633ba650c41847b704706f1d0e, type: 3}
 --- !u!1 &8628306506034023472 stripped
 GameObject:
@@ -325,12 +319,6 @@ MonoBehaviour:
   m_Script: {fileID: -765806418, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &7986530341886790434 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9053203274082567947, guid: 3abc32633ba650c41847b704706f1d0e,
-    type: 3}
-  m_PrefabInstance: {fileID: 1402496769204603945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!212 &1402496767526166674 stripped
 SpriteRenderer:
   m_CorrespondingSourceObject: {fileID: 1679109307, guid: 3abc32633ba650c41847b704706f1d0e,
@@ -436,6 +424,12 @@ LineRenderer:
 --- !u!1 &1402496767943191451 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1290921906, guid: 3abc32633ba650c41847b704706f1d0e,
+    type: 3}
+  m_PrefabInstance: {fileID: 1402496769204603945}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4351931551703468490 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3392197679743976931, guid: 3abc32633ba650c41847b704706f1d0e,
     type: 3}
   m_PrefabInstance: {fileID: 1402496769204603945}
   m_PrefabAsset: {fileID: 0}
