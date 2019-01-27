@@ -39,5 +39,10 @@ public class KeyboardCommand : MonoBehaviour
         {
             _tool.SelectedTool = _tool.SelectedTool + 1;
         }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            _tool.ActivateMultiTool();
+        }
     }
 }

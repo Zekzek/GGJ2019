@@ -36,6 +36,11 @@ public class MultiTool : MonoBehaviour
         Tools[_selectedTool].SetActive(true);
     }
 
+    public void ActivateMultiTool()
+    {
+        Tools[_selectedTool].GetComponent<ToolControl>().DoActivate();
+    }
+
     void Update()
     {
         Vector3 diff = Camera.main.ScreenToWorldPoint(Target) - transform.position;
