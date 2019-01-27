@@ -298,7 +298,7 @@ public class AIController : MonoBehaviour
         float bestScore = 0;
         foreach (Ship ship in ships)
         {
-            if (relationships[ship] >= ALLY_RELATIONSHIP_LEVEL)
+            if (relationships.ContainsKey(ship) && relationships[ship] >= ALLY_RELATIONSHIP_LEVEL)
                 continue;
 
             Vector3 toTarget = ship.transform.position - source;
