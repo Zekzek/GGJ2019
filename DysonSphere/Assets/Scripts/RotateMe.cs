@@ -30,14 +30,18 @@ public class RotateMe : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (LockOn && Target != null)
+        if (LockOn)
         {
             var targetRotationLookAt = (transform.parent.position - Target).normalized;
-            DeltaAngle = Mathf.Acos(Vector3.Dot(transform.up, targetRotationLookAt));
-            var axis = Vector3.Cross(transform.up, targetRotationLookAt);
 
-            var amountToRotateBy = Mathf.Clamp(DeltaAngle, -Time.deltaTime * RotSpeed, Time.deltaTime * RotSpeed);
-            transform.RotateAround(transform.parent.position, axis, amountToRotateBy);
+            DeltaAngle = Mathf.Acos(Vector3.Dot(transform.up, targetRotationLookAt));
+
+            if (!float.IsNaN(DeltaAngle))
+            {
+                var axis = Vector3.Cross(transform.up, targetRotationLookAt);
+                var amountToRotateBy = Mathf.Clamp(DeltaAngle, -Time.deltaTime * RotSpeed, Time.deltaTime * RotSpeed);
+                transform.RotateAround(transform.parent.position, axis, amountToRotateBy);
+            }
         }
         else
         {
