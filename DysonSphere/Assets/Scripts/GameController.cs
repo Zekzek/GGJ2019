@@ -40,8 +40,6 @@ public class GameController : MonoBehaviour
         }
 
         Debug.Log("Placed things on 24 of " + retryCounter + "attempts");
-
-        GameState.Instance.player.OnResourceChange?.Invoke();
     }
 
     private bool IsInOpenSpace(List<Vector2> usedPoints, Vector2 prospectivePoint)
