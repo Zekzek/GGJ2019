@@ -34,9 +34,15 @@ public class UnrestEvent : ChoiceEvent
                         {
                             100,
                             () => {
+                                GameState.Instance.player.Resources = 17;
+                                int resources_thrown = 20;
+                                int old_resource_num = (int) GameState.Instance.player.Resources;
+
                                 GameState.Instance.player.Unrest++;
-                                GameState.Instance.player.Resources = Math.Min(0, GameState.Instance.player.Resources - 20);
-                                return "Your crew throws 100 resources off the ship in revolt!";
+                                GameState.Instance.player.Resources = Math.Max(0, GameState.Instance.player.Resources - resources_thrown);
+                                int amount_resources_lost = (int) old_resource_num - (int) GameState.Instance.player.Resources;
+
+                                return string.Format("Your crew throws {0} resources off the ship in revolt!", amount_resources_lost);
                             }
                         }
                     }.PickOne()

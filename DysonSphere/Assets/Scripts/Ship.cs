@@ -43,6 +43,7 @@ public class Ship : MonoBehaviour, IScannable
         if (PlayerShip())
         {
             GameState.Instance.player.Ship = GetComponent<Ship>();
+            GameState.Instance.player.OnResourceChange?.Invoke();
         }
     }
 

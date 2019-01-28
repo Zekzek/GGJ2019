@@ -18,7 +18,7 @@ public class RotateMe : MonoBehaviour
     private Rigidbody2D _parentRB;
     private float _dragForce = 5;
 
-    private float _maxVel = 7f;
+    public float _maxVel = 7f;
     private float _sqrMaxVel;
     private void Start()
     {
