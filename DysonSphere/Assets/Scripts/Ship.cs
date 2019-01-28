@@ -102,6 +102,7 @@ public class Ship : MonoBehaviour, IScannable
     private void Die(Ship damageSource = null)
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
+		GameState.Instance.RemoveShip(this);
 		if (!PlayerShip())
 		{
 			GameState.Instance.AddShipLog(GenerateShipLog(damageSource.PlayerShip()));
