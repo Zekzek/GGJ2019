@@ -41,7 +41,7 @@ public class StoryEventController : MonoBehaviour
 	private void Awake()
 	{
 		nextEventTime = PickNextEventTime();
-	}
+    }
 
 	public void Update()
 	{
