@@ -383,6 +383,7 @@ public class AIController : MonoBehaviour
             relationships.Add(ship, 0);
 
         relationships[ship] += commsJoy;
+        GameState.Instance.CheckWin();
         DoAI();
     }
 
