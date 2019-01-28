@@ -41,7 +41,8 @@ public class StoryEventController : MonoBehaviour
 	private void Awake()
 	{
 		nextEventTime = PickNextEventTime();
-	}
+        ShowScenario(new UnrestEvent());
+    }
 
 	public void Update()
 	{

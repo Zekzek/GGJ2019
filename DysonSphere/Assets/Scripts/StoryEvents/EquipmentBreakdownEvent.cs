@@ -21,7 +21,7 @@ public class EquipmentBreakdownEvent : ChoiceEvent
                                 ()=> {
                                     RotateMe rm = GameState.Instance.player.Ship.GetComponentInChildren<RotateMe>();
                                     rm._maxVel = Math.Max(1, rm._maxVel - 2);
-                                    return "Surprisingly, that didn't work, speed reduced.";
+                                    return "Surprisingly, that didn't work.";
                                  }
                             },
                             {
@@ -31,14 +31,14 @@ public class EquipmentBreakdownEvent : ChoiceEvent
                                     RotateMe rm = GameState.Instance.player.Ship.GetComponentInChildren<RotateMe>();
                                     rm._maxVel = Math.Max(1, rm._maxVel - 2);
 
-                                    return "That didn't work and your crew become resentful of your inaction.";
+                                    return "That didn't work and your crew becomes resentful of your inaction.";
                                  }
                             },
                             {
                                 5,
                                 ()=> {
                                     GameState.Instance.player.Unrest -= 1;
-                                    return "Wow, that actually worked! Speed unchanged.";
+                                    return "Wow, that actually worked!";
                                  }
                             }
                         }.PickOne()
@@ -55,7 +55,7 @@ public class EquipmentBreakdownEvent : ChoiceEvent
                                     RotateMe rm = GameState.Instance.player.Ship.GetComponentInChildren<RotateMe>();
                                     rm._maxVel = Math.Max(1, rm._maxVel - 0.05f);
 
-                                    return "The problem was partially fixed with only some loss to speed. Unfortunately duct tape doesn't solve all problems.";
+                                    return "Minor speed loss, unfortunately duct tape doesn't solve all problems.";
                                  }
                             },
                             {
@@ -71,7 +71,7 @@ public class EquipmentBreakdownEvent : ChoiceEvent
                                     RotateMe rm = GameState.Instance.player.Ship.GetComponentInChildren<RotateMe>();
                                     rm._maxVel += 2;
 
-                                    return "Repairs successful and system improved. Speed increased!";
+                                    return "Repairs successful and system improved.";
                                 }
                             }
                         }.PickOne()

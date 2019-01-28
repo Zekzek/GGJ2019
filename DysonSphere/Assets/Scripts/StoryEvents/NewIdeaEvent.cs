@@ -24,7 +24,7 @@ public class NewIdeaEvent : ChoiceEvent
 						attemptOption = ()=>
 						{
 							GameState.Instance.player.GatherDistance += UnityEngine.Random.Range(1,5);
-							return "It works! You can now garther from further away!";
+							return "It works! You can now gather from further away!";
 						}
 					}
 				},
@@ -44,7 +44,7 @@ public class NewIdeaEvent : ChoiceEvent
 
         title = "Research Opportunity";
 
-		scenario = string.Format("One of your crew has an idea to imrove the {0}.", upgrade.scenarioItem);
+		scenario = string.Format("One of your crew has an idea to improve the {0}.", upgrade.scenarioItem);
 
 		options = new List<Option>()
 		{
