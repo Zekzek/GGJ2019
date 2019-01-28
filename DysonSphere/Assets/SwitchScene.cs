@@ -11,4 +11,8 @@ public class SwitchScene : MonoBehaviour
     {
         SceneManager.LoadScene(sceneName);
     }
+	private void Awake()
+	{
+		Time.timeScale = 1;
+	}
 }
