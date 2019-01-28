@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using UnityEngine;
 
 public class GameState : MonoBehaviour
@@ -12,6 +13,7 @@ public class GameState : MonoBehaviour
     public Planet[] Planets { get { return planets.ToArray(); } }
     private List<Ship> ships = new List<Ship>();
     public Ship[] Ships { get { return ships.ToArray(); } }
+	private List<ShipLog> shipLogs = new List<ShipLog>();
 
     public static GameState Instance
     {
@@ -41,7 +43,12 @@ public class GameState : MonoBehaviour
         ships.Add(ship);
     }
 
-    public void RemovePlanet(Planet planet)
+	public void AddShipLog(ShipLog shipLog)
+	{
+		shipLogs.Add(shipLog);
+	}
+
+	public void RemovePlanet(Planet planet)
     {
         planets.Remove(planet);
     }
@@ -82,18 +89,63 @@ public class GameState : MonoBehaviour
 
         if (over)
         {
-            if (win)
-            {
-                PopupManager.Show(Resources.Load<VictoryPopup>("UI/Victory Popup"));
-            }
-            else
-            {
-                PopupManager.Show(Resources.Load<DefeatPopup>("UI/Defeat Popup"));
-            }
+			if (win)
+			{
+				PopupManager.Show(Resources.Load<VictoryPopup>("UI/Victory Popup"));
+			}
+			else
+			{
+				PopupManager.Show(Resources.Load<DefeatPopup>("UI/Defeat Popup"));
+			}
 
-            Debug.Log("Game over!!!");
+			Debug.Log("Game over!!!");
         }
 
         return over;
     }
+
+	public string GenerateSynopsis()
+	{
+		StringBuilder sb = new StringBuilder();
+		ShipLog[] logs = shipLogs.Concat(ships.Where(s => !s.PlayerShip()).Select(s => s.GenerateShipLog(false))).ToArray();
+		int liveAllies = 0;
+		int deadAllies = 0;
+		int liveEnemies = 0;
+		int deadEnemies = 0;
+		foreach(ShipLog log in logs)
+		{
+			switch(log.PlayerRelationship)
+			{
+				case AIController.RelationshipStatus.Ally:
+					{
+						if(log.Dead)
+						{
+							deadAllies++;
+						}
+						else
+						{
+							liveAllies++;
+						}
+					}
+					break;
+				case AIController.RelationshipStatus.Enemy:
+					{
+						if (log.Dead)
+						{
+							deadEnemies++;
+						}
+						else
+						{
+							liveEnemies++;
+						}
+					}
+					break;
+			}
+		}
+		sb.AppendLine(string.Format("Allies : {0} Live, {1} Dead", liveAllies, deadAllies));
+		sb.AppendLine(string.Format("Enemies : {0} Live, {1} Dead", liveEnemies, deadEnemies));
+		sb.AppendLine(string.Format("Unrest : {0}", Instance.player.Unrest));
+
+		return sb.ToString();
+	}
 }

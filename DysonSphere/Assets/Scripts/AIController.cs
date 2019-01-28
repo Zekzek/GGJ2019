@@ -121,8 +121,9 @@ public class AIController : MonoBehaviour
     private Ship targetShip;
 
     private Dictionary<Ship, int> relationships = new Dictionary<Ship, int>();
+	public IDictionary<Ship,int> GetRelationships { get { return relationships; } }
 
-    private MultiTool multiTool;
+	private MultiTool multiTool;
     private Ship myShip;
 
     private void Start()
