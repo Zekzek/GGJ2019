@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour, IScannable
 {
-    public PlanetPresetDB planetDB;
+	public PlanetPresetDB planetDB;
     public SpriteRenderer[] landDetailSpr;
     public SpriteRenderer[] waterSpr;
     public SpriteRenderer[] windSpr;
     public GameObject explosion;
     private List<Resource> resources = new List<Resource>();
     public int Health { get; set; }
-    private AIController ai;
+	private AIController ai;
 
-    int maxHealth = 100;
+	int maxHealth = 100;
 
     public AIController.RelationshipStatus PlayerRelationShip { get { return ai == null ? AIController.RelationshipStatus.Neutral : ai.PlayerRelationship; } }
 
@@ -96,14 +96,17 @@ public class Ship : MonoBehaviour, IScannable
             ai.TookDamageFrom(damageSource);
         Health -= damage;
         if (Health <= 0)
-            Die();
+            Die(damageSource);
     }
 
-    private void Die()
+    private void Die(Ship damageSource = null)
     {
         Instantiate(explosion, transform.position, Quaternion.identity);
-        GameState.Instance.RemoveShip(this);
-        GameState.Instance.CheckWin();
+		if (!PlayerShip())
+		{
+			GameState.Instance.AddShipLog(GenerateShipLog(damageSource.PlayerShip()));
+		}
+		GameState.Instance.CheckWin();
         Destroy(gameObject);
     }
 
@@ -159,4 +162,17 @@ public class Ship : MonoBehaviour, IScannable
     {
         return ai == null;
     }
+	public ShipLog GenerateShipLog(bool killedByPlayer)
+	{
+		ShipLog log = new ShipLog();
+		if (ai != null)
+		{
+			log.PlayerRelationship = ai.PlayerRelationship;
+			log.Temperment = ai.Temperment;
+		}
+		log.Dead = Health<=0;
+		log.KilledByPlayer = killedByPlayer;
+
+		return log;
+	}
 }
