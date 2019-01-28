@@ -48,6 +48,6 @@ public class GameController : MonoBehaviour
         foreach (Vector2 point in usedPoints)
             if ((point - prospectivePoint).sqrMagnitude < SQR_MIN_CLUSTER_DISTANCE)
                 return false;
-        return true;
+        return true;    
     }
 }
